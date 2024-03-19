@@ -4,6 +4,110 @@
 
 #include "clientes.h"
 #include "menu.h"
+#include "proveedores.h"
+#include "descuentosclientes.h"
+
+
+Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
+
+    Cliente *nuevoarray;
+
+    int control = 0, opcion, permiso = 1, Clientes, cartera, elminado = 0;
+    char nombre[21], Direccion[51], localidad[21], Provincia[21], email[31], contrasena[16];
+
+    *n_clientes += 1;
+    Clientes = *n_clientes;
+    nuevoarray = (Cliente*)realloc(arrayClientes, (*n_clientes) * sizeof(Cliente));
+
+    // Formulario registro
+    while(control == 0){
+        printf("Introduce email (maximo 30 caracteres): "); /*Colocar*/fflush(stdin);
+        fgets(email, 31, stdin);
+        EliminarSaltoDeLinea(email);
+        fflush(stdin);
+
+        /*while(BuscarCliente(email, arrayClientes, Clientes-1) != -1){        //Comparar que no exista otro Cliente igual
+            printf("\nEl Cliente introducido ya existe, vuelva a introducir otro (maximo 5 caracteres): ");
+            scanf("%s", email);
+            EliminarSaltoDeLinea(email);
+            fflush(stdin);
+        }
+*/
+        //Formulario datos de Cliente
+        printf("Introduce contrasena (maximo 15 caracteres): ");
+        fgets(contrasena, 16, stdin);
+        EliminarSaltoDeLinea(contrasena);
+        fflush(stdin);
+        printf("\nIntroduce nombre y apellido (maximo 20 caracteres): ");
+        fgets(nombre, 21, stdin);
+        EliminarSaltoDeLinea(nombre);
+        fflush(stdin);
+        printf("Introduce direccion (maximo 50 caracteres): ");
+        fgets(Direccion, 51, stdin);
+        EliminarSaltoDeLinea(Direccion);
+        fflush(stdin);
+        printf("Introduce localidad (maximo 20 caracteres): ");
+        fgets(localidad, 21, stdin);
+        EliminarSaltoDeLinea(localidad);
+        fflush(stdin);
+        printf("Introduce Provincia (maximo 20 caracteres): ");
+        fgets(Provincia, 21, stdin);
+        EliminarSaltoDeLinea(Provincia);
+        fflush(stdin);
+        /*if(op == 1){                                                                        //Menu solo accesible si eres administrador, para seleccionar los permisos
+            printf("Permisios del Cliente:\n1.- Cliente\n2.- Administrador\n");
+            scanf("%i", &permiso);
+            while(permiso != 1 && permiso != 2){
+                printf("Error, vuelva a introducir: ");
+                scanf("%i", &permiso);
+            }
+        }*/
+
+        // Validacion datos
+        printf("\n¿Son correctos los datos introducidos?");
+        /*if(op == 1){
+            if(permiso == 1) printf("Permisos: Cliente\n");
+            else printf("Permisos: administrador\n");
+        }*/
+        printf("email: %s\ncontrasena: %s\nNombre: %s\nDireccion: %s\nLocalidad: %s\nProvincia: %s\n1.- Si || 2.- No || 3.- Cancelar registro\n", email, contrasena, nombre, Direccion, localidad, Provincia);
+        scanf("%i", &opcion);
+        while(opcion < 1 && opcion > 3){
+            printf("Error, vuelva a introducir: ");
+            scanf("%i", &opcion);
+        }                                               //El Cliente valida los datos, si son correctos continua y almacena los datos, si no comienza de nuevo el registro
+
+        // Verificacion y guardado de Cliente con su nueva id;
+        if(opcion == 2) printf("Repita el formulario con los datos correctos.\n");
+        else{
+            if(opcion == 3){
+                *n_clientes -= 1;                //Si no se registra quitamos el Cliente anadido al principio
+                memcpy(nuevoarray, arrayClientes, *n_clientes);              //Si no se registras, remplazamos el array temporal por el original para que no se pierda ningun dato sin el nuevo Cliente registrado
+                control = 1;
+            }
+            else{
+                // Guardar en estructura
+                nuevoarray[*n_clientes - 1].Id_Cliente = nuevoarray[*n_clientes - 2].Id_Cliente + 1;
+                nuevoarray[*n_clientes - 1].Eliminado = 0;
+
+                strcpy(nuevoarray[*n_clientes - 1].email, email);
+                strcpy(nuevoarray[*n_clientes - 1].Contrasena, contrasena);
+                strcpy(nuevoarray[*n_clientes - 1].Nomb_Cliente, nombre);
+                strcpy(nuevoarray[*n_clientes - 1].Dir_cliente, Direccion);
+                strcpy(nuevoarray[*n_clientes - 1].Localidad, localidad);
+                strcpy(nuevoarray[*n_clientes - 1].Provincia, Provincia);
+
+                nuevoarray[*n_clientes - 1].Cartera = 0;  //Dinero inicial
+                /*if(permiso == 1) strcpy(nuevoarray[*n_clientes - 1].Perfil_Cliente, "Cliente");
+                else strcpy(nuevoarray[*n_clientes - 1].Perfil_Cliente, "administrador");*/
+
+                control = 1;
+            }
+        }
+    }
+    // Cierre
+    return nuevoarray;         //Devolvemos el array al original con los datos del nuevo Cliente o como estaba al principio si no se registra
+
+}
 
 Cliente* CargarClientes(int *n_clientes){
 
@@ -93,4 +197,14 @@ int ContarLineas(FILE *f){
 
     return i;
 
+}
+
+//Cabecera: funcion EliminarSaltoDeLinea(E/S cadena: cadena)
+//Precondicion: recibe una cadena de caracteres valida y no vacia
+//Postcondicion: devuelve la cadena sin el salto de linea del final
+void EliminarSaltoDeLinea(char *cadena){
+
+	int i = strlen(cadena);
+
+	if(cadena[i-1] == '\n') cadena[i-1] = '\0';     //Eliminamos el salto de linea de las cadenas de caracteres
 }

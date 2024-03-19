@@ -15,30 +15,9 @@ typedef struct{
 
 } Cliente;
 
-typedef struct{
-
-    int Id_empresa;
-    char Nombre[21];
-    char email[31];
-    char Contrasena[16];
-    char Perfil_usuario[13];    // O int Perfil_usuario == 0(administrador) / 1(provedor)
-    //int Eliminado;
-
-} Proveedor;
-
-typedef struct{
-
-    int Id_cliente;         // Maximo 7 digitos
-    int Id_Cod;             // Maximo 10 digitos
-    int Fechar_asig[3];     // dd, mm, aaaa
-    int Fecha_cad[3];       // dd, mm, aaaa
-    int Estado;              // 0(No aplicado) / 1(Aplicado)
-    //int Eliminado;
-
-} DescuentoCliente;
-
 //Funciones publicas
+Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/);
 Cliente* CargarClientes(int *n_clientes);
-Proveedor* CargarProveedores(int *n_proveedores)
+GuardarEstrucutura(Cliente *arrayClientes, int n_Clientes);
 
 #endif // CLIENTES_H_INCLUDED
