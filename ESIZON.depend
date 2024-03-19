@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1710335118 source:c:\users\pablo\desktop\universidad\mp\esizon\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"clientes.h"
+
+1710333750 c:\users\pablo\desktop\universidad\mp\esizon\menu.h
+
+1710347593 c:\users\pablo\desktop\universidad\mp\esizon\clientes.h
+
+1710335118 source:c:\users\pablo\desktop\universidad\mp\esizon\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"clientes.h"
+
+1710347379 source:c:\users\pablo\desktop\universidad\mp\esizon\clientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"clientes.h"
+	"menu.h"
+
