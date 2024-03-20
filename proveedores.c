@@ -11,6 +11,7 @@
 Proveedor* CargarProveedores(int *n_proveedores){
 
     int n_lineas = 0, i;
+    char perfil[13];
     Proveedor *proveedores;
     FILE *f;
 
@@ -29,7 +30,11 @@ Proveedor* CargarProveedores(int *n_proveedores){
         fscanf(f, "%[^-]-", proveedores[i].Nombre);
         fscanf(f, "%[^-]-", proveedores[i].email);
         fscanf(f, "%[^-]-", proveedores[i].Contrasena);
-        fscanf(f, "%[^\n]\n", &proveedores[i].Perfil_usuario);      //¿?¿?  Cambiar por sustitucion de enteros ¿?¿?
+        fscanf(f, "%[^\n]\n", perfil);
+        EliminarSaltoDeLinea(perfil);
+        if(strcmp(perfil, "administrador") == 0) proveedores[i].Perfil_usuario = 0;
+        else proveedores[i].Perfil_usuario = 1;
+        //fscanf(f, "%[^\n]\n", &proveedores[i].Perfil_usuario);      //¿?¿?  Cambiar por sustitucion de enteros ¿?¿?
         proveedores[i].Eliminado = 0;
     }
 
@@ -58,7 +63,9 @@ void GuardarEstrucutura(Proveedor *arrayProveedores, int n_proveedores){
             fputc('-', f);
             fputs(arrayProveedores[i].Contrasena, f);
             fputc('-', f);
-            fputs(arrayProveedores[i].Perfil_usuario, f);
+            if(arrayProveedores[i].Perfil_usuario == 0) fputs("administrador", f);
+            else fputs("proveedor", f);
+            //fputs(arrayProveedores[i].Perfil_usuario, f);
 
             if(i != n_proveedores-1) fputc('\n', f);
         }

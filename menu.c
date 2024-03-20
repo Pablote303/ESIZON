@@ -22,4 +22,16 @@ void menu(){
     DescuentoCliente *arrayDescuentosClientes;
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
 
+    /**/
+
+
+
+    /**/
+
+
+    //Guardar estructuras en fichero
+
+
+    return 0;
+
 }
