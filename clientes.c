@@ -122,6 +122,64 @@ void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion)
 //Cabecera:
 //Precondicion:
 //Postcondicion:
+int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char email, int id, int op){
+
+    int i, control = 0, posicion = -1, opcion;
+
+    switch(op){
+        case 1:
+            for(i = 0; i < n_clientes && control == 0; i++){
+                if(strcmp(nombre, arrayClientes[i].nombre) == 0){
+                    printf("\nNombre: %s  Email: %s\n¿Es el cliente que busca? (1.-Si / 2.-NO):  ", arrayClientes[i].Nomb_cliente, arrayClientes[i].email);
+                    scanf("%i", &opcion);
+                    while(opcion != 1 && opcion != 2){
+                        printf("\nError, valor no valido, vuelva a introducir (1.-Si / 2.-NO):  ");
+                        scanf("%i", &opcion);
+                    }
+                    if(opcion == 1){
+                        posicion = i;
+                        control = 1;
+                    }
+                }
+            }
+            break;
+        case 2:
+            for(i = 0; i < n_clientes && control == 0; i++){
+                if(strcmp(email, arrayClientes[i].email) == 0){
+                    posicion = i;
+                    control = 1;
+                }
+            }
+            break;
+        case 3:
+            for(i = 0; i < n_clientes && control == 0; i++){
+                if(id == arrayClientes[i].Id_cliente){
+                    posicion = i;
+                    control = 1;
+                }
+            }
+            break;
+    default: printf("\nError en la seleccion de modo de busqueda.");
+    }
+
+    printf("\nError, no se ha encontrado ningun cliente");
+
+    return posicion;
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion){
+
+
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 Cliente* CargarClientes(int *n_clientes){
 
     int n_lineas = 0, i;
