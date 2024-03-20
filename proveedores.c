@@ -7,8 +7,101 @@
 #include "proveedores.h"
 #include "descuentosclientes.h"
 
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int op){  // op == 0(Normal) / 1(ADMIN)
 
-Proveedor* CargarProveedores(int *n_proveedores){
+    Proveedor *nuevoarray;
+
+    int control = 0, opcion, elminado = 0, permiso;
+    char nombre[21], email[31], contrasena[16];
+
+    *n_proveedores += 1;
+    Proveedor = *n_proveedores;
+    nuevoarray = (Proveedor*)realloc(arrayProveedores, (*n_proveedores) * sizeof(Proveedor));
+
+    // Formulario registro
+    while(control == 0){
+        printf("Introduce email (maximo 30 caracteres): "); /*Colocar*/fflush(stdin);
+        fgets(email, 31, stdin);
+        EliminarSaltoDeLinea(email);
+        fflush(stdin);
+
+        /*while(BuscarCliente(email, arrayClientes, Clientes-1) != -1){        //Comparar que no exista otro Cliente igual
+            printf("\nEl Cliente introducido ya existe, vuelva a introducir otro (maximo 5 caracteres): ");
+            scanf("%s", email);
+            EliminarSaltoDeLinea(email);
+            fflush(stdin);
+        }
+*/
+        //Formulario datos de Proveedor
+        printf("Introduce contrasena (maximo 15 caracteres): ");
+        fgets(contrasena, 16, stdin);
+        EliminarSaltoDeLinea(contrasena);
+        fflush(stdin);
+        printf("\nIntroduce nombre (maximo 20 caracteres): ");
+        fgets(nombre, 21, stdin);
+        EliminarSaltoDeLinea(nombre);
+        fflush(stdin);
+
+        if(op == 1){                                                                        //Menu solo accesible si eres administrador, para seleccionar los permisos
+            printf("Permisios del proveedor:\n1.- Administrador\n2.- Proveedor\n");
+            scanf("%i", &permiso);
+            while(permiso != 1 && permiso != 2){
+                printf("Error, vuelva a introducir: ");
+                scanf("%i", &permiso);
+            }
+            permiso--;
+        }
+
+        // Validacion datos
+        printf("\n¿Son correctos los datos introducidos?");
+        if(op == 1){
+            if(permiso == 1) printf("Permisos: Cliente\n");
+            else printf("Permisos: administrador\n");
+        }
+        printf("email: %s\ncontrasena: %s\nNombre: \n1.- Si || 2.- No || 3.- Cancelar registro\n", email, contrasena, nombre);
+        scanf("%i", &opcion);
+        while(opcion < 1 && opcion > 3){
+            printf("Error, vuelva a introducir: ");
+            scanf("%i", &opcion);
+        }
+
+        // Verificacion y guardado de Proveedor con su nueva id;
+        if(opcion == 2) printf("Repita el formulario con los datos correctos.\n");
+        else{
+            if(opcion == 3){
+                *n_proveedores  -= 1;                //Si no se registra quitamos el Proveedor anadido al principio
+                memcpy(nuevoarray, arrayProveedores, *n_proveedores ;              //Si no se registras, remplazamos el array temporal por el original para que no se pierda ningun dato sin el nuevo Cliente registrado
+                control = 1;
+            }
+            else{
+                // Guardar en estructura
+                nuevoarray[*n_proveedores - 1].Id = nuevoarray[*n_proveedores  - 2].Id_empresa + 1;
+                nuevoarray[*n_proveedores  - 1].Eliminado = 0;
+
+                strcpy(nuevoarray[*n_proveedores  - 1].email, email);
+                strcpy(nuevoarray[*n_proveedores  - 1].Contrasena, contrasena);
+                strcpy(nuevoarray[*n_proveedores  - 1].Nomb_Cliente, nombre);
+
+                nuevoarray[*n_proveedores  - 1].Perfil_usuario = permiso;  //Dinero inicial
+                /*if(permiso == 1) strcpy(nuevoarray[*n_clientes - 1].Perfil_usuario, "Proveedor");
+                else strcpy(nuevoarray[*n_clientes - 1].Perfil_usuario, "administrador");*/
+
+                control = 1;
+            }
+        }
+    }
+    // Cierre
+    return nuevoarray;         //Devolvemos el array al original con los datos del nuevo Proveedor o como estaba al principio si no se registra
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+Proveedor *CargarProveedores(int *n_proveedores){
 
     int n_lineas = 0, i;
     char perfil[13];
@@ -43,6 +136,9 @@ Proveedor* CargarProveedores(int *n_proveedores){
 
 }
 
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 void GuardarEstrucutura(Proveedor *arrayProveedores, int n_proveedores){
 
     int i = 0;

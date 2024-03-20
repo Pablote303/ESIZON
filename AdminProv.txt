@@ -1,0 +1,3 @@
+0000-SUPERADMIN-admin@admin.com-admin-administrador
+0001-ESIZON-pablo.torres@esizon.com-123123-administrador
+0002-UCA-central@uca.es-uca123-proveedor

@@ -7,7 +7,9 @@
 #include "proveedores.h"
 #include "descuentosclientes.h"
 
-
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
 
     Cliente *nuevoarray;
@@ -54,21 +56,9 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
         fgets(Provincia, 21, stdin);
         EliminarSaltoDeLinea(Provincia);
         fflush(stdin);
-        /*if(op == 1){                                                                        //Menu solo accesible si eres administrador, para seleccionar los permisos
-            printf("Permisios del Cliente:\n1.- Cliente\n2.- Administrador\n");
-            scanf("%i", &permiso);
-            while(permiso != 1 && permiso != 2){
-                printf("Error, vuelva a introducir: ");
-                scanf("%i", &permiso);
-            }
-        }*/
 
         // Validacion datos
         printf("\n¿Son correctos los datos introducidos?");
-        /*if(op == 1){
-            if(permiso == 1) printf("Permisos: Cliente\n");
-            else printf("Permisos: administrador\n");
-        }*/
         printf("email: %s\ncontrasena: %s\nNombre: %s\nDireccion: %s\nLocalidad: %s\nProvincia: %s\n1.- Si || 2.- No || 3.- Cancelar registro\n", email, contrasena, nombre, Direccion, localidad, Provincia);
         scanf("%i", &opcion);
         while(opcion < 1 && opcion > 3){
@@ -97,8 +87,6 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
                 strcpy(nuevoarray[*n_clientes - 1].Provincia, Provincia);
 
                 nuevoarray[*n_clientes - 1].Cartera = 0;  //Dinero inicial
-                /*if(permiso == 1) strcpy(nuevoarray[*n_clientes - 1].Perfil_Cliente, "Cliente");
-                else strcpy(nuevoarray[*n_clientes - 1].Perfil_Cliente, "administrador");*/
 
                 control = 1;
             }
@@ -109,6 +97,31 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
 
 }
 
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion){
+
+    int i;
+
+    if(posicion == -1){
+        for(i = 0; i < n_clientes, i++){
+            printf("ID:%i  Nombre: %s  Direccion: %s  Localidad: %s  Provincia: %s", arrayClientes[i].Id_cliente, arrayClientes[i].Nomb_cliente, arrayClientes[i].Dir_cliente, arrayClientes[i].Localidad, arrayClientes[i].Provincia);
+            if(op == 1) printf("\nEmail: %s  Contrasena: %s  Cartera: %s", arrayClientes[i].email, arrayClientes[i].Contrasena, arrayClientes[i].Cartera);
+            puts("");
+        }
+    }
+    else{
+        printf("ID:%i  Nombre: %s  Direccion: %s  Localidad: %s  Provincia: %s", arrayClientes[posicion].Id_cliente, arrayClientes[posicion].Nomb_cliente, arrayClientes[posicion].Dir_cliente, arrayClientes[posicion].Localidad, arrayClientes[posicion].Provincia);
+        if(op == 1) printf("\nEmail: %s  Contrasena: %s  Cartera: %s", arrayClientes[i].email, arrayClientes[i].Contrasena, arrayClientes[i].Cartera);
+        punts("");
+    }
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 Cliente* CargarClientes(int *n_clientes){
 
     int n_lineas = 0, i;
@@ -146,6 +159,9 @@ Cliente* CargarClientes(int *n_clientes){
 
 }
 
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 void GuardarEstrucutura(Cliente *arrayClientes, int n_Clientes){
 
     int i = 0;
@@ -183,7 +199,9 @@ void GuardarEstrucutura(Cliente *arrayClientes, int n_Clientes){
 
 }
 
-
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 int ContarLineas(FILE *f){
 
     int i = 1;
