@@ -173,7 +173,20 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char emai
 //Postcondicion:
 void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion){
 
+    int opcion;
 
+    printf("Nombre: %s  Email: %s\n¿Desea eliminar el cliente? (1.- SI / 2.- NO): ", arrayCliente[posicion].Nomb_cliente, arrayCliente[posicion].email);
+    scanf("%i", &opcion);
+    while(opcion != 1 && opcion != 2){
+        printf("\nError, valor introducido no valido, vuelva a introducirlo: ");
+        scanf("%i", &opcion);
+    }
+
+    if(opcion == 1){
+        arrayCliente[posicion].Eliminado = 1;
+        printf("\nEl cliente se ha borrado...");
+    }
+    else printf("\nCancelado.\nVolviendo...");
 
 }
 

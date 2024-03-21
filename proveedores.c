@@ -98,6 +98,27 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
 
 }
 
+void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, int posicion){
+
+    int i;
+
+    if(posicion == -1){
+        for(i = 0; i < n_proveedores; i++){
+            printf("ID: %07i  Nombre: %s  Email: %s", arrayProveedores[i].Id_empresa, arrayProveedores[i].Nombre, arrayProveedores[i].email);
+            if(op == 1){
+                if(arrayProveedores[i].Perfil_usuario == 0) printf("  Perfil: Administrador");
+                else printf("  Perfil: Proveedor");
+            }
+            puts("");
+        }
+    }
+    else{
+        printf("Nombre: %s  Email: %s  C")
+        if(op == 1) printf("")
+    }
+
+}
+
 //Cabecera:
 //Precondicion:
 //Postcondicion:
