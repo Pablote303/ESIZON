@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1710335118 source:c:\users\pablo\desktop\universidad\mp\esizon\main.c
+1710338718 source:c:\users\pablo\desktop\universidad\mp\esizon\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
 	"clientes.h"
 
-1710333750 c:\users\pablo\desktop\universidad\mp\esizon\menu.h
+1710337350 c:\users\pablo\desktop\universidad\mp\esizon\menu.h
 
-1710934261 c:\users\pablo\desktop\universidad\mp\esizon\clientes.h
+1710937861 c:\users\pablo\desktop\universidad\mp\esizon\clientes.h
 
 1710335118 source:c:\users\pablo\desktop\universidad\mp\esizon\menu.c
 	<stdio.h>

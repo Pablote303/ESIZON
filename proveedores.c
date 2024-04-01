@@ -122,6 +122,28 @@ void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, i
 //Cabecera:
 //Precondicion:
 //Postcondicion:
+void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion){
+
+    int opcion;
+
+    printf("Nombre: %s  Email: %s\n¿Desea eliminar el proveedor? (1.- SI / 2.- NO): ", arrayProveedores[posicion].Nombre, arrayProveedores[posicion].email);
+    scanf("%i", &opcion);
+    while(opcion != 1 && opcion != 2){
+        printf("\nError, valor introducido no valido, vuelva a introducirlo: ");
+        scanf("%i", &opcion);
+    }
+
+    if(opcion == 1){
+        arrayProveedores[posicion].Eliminado = 1;
+        printf("\nEl proveedor se ha borrado...");
+    }
+    else printf("\nCancelado.\nVolviendo...");
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 Proveedor *CargarProveedores(int *n_proveedores){
 
     int n_lineas = 0, i;

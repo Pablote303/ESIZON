@@ -97,6 +97,39 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
 
 }
 
+int login(Cliente *arrayClientes int *id, int *n_clientes){
+
+    int perm = -1, cont = 0, posicion, control = 0, aux, n_clientes_aux, i = 0, intento = 0;
+    char email_aux[21], contrasena_aux[9];
+
+    n_clientes_aux = *n_clientes;
+    n_proveedores_aux = *n_proveedores;
+
+    while(perm < 0){
+        printf("");
+        scanf("%s", email_aux);
+
+        if(BuscarCliente(Cliente *arrayClientes, n_clientes_aux, 0, email_aux, 0, 2) != 1){
+            perm = 2;
+        }
+        else{
+            if(BuscarProveedor() != -1){
+                perm = arrayProveedores[posicion].Perfil_usuario;
+            }
+            else{
+                printf("\nError, usuario no encontrado, vuelva a intentarlo...");
+                intento++;
+                if(intentos > 3){
+
+                }
+            }
+        }
+    }
+
+    return perm;  //0 ADMIN, 1 PROVEEDOR, 2 CLIENTE, 3 ERROR NO EXISTE
+
+}
+
 //Cabecera:
 //Precondicion:
 //Postcondicion:
