@@ -22,11 +22,47 @@ void menu(){
     DescuentoCliente *arrayDescuentosClientes;
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
 
-    /**/
+    /*INICIAL*/
+        // INICIAR SESION
+        // CREAR CUENTA "SOLO CLIENTE"   º
+
+    /*MENU CLIENTES*/
+        /*PERFIL*/
+            // DATOS  º
+            // MODIFICAR  º
+            // CONSULTAR CARTERA
+            // ANADIR FONDOS
+        /*DESCUENTOS*/
+            // CONSULTAR DESCUENTO CLIENTES
 
 
+    /*MENU ADMIN*/
+        /*PERFIL*/
+            // DATOS    º
+            // MODIFICAR
+        /*CLIENTES*/
+            // ALTA   º
+            // BAJA   º
+            // BUSQUEDA    º
+            // LISTADO   º
+            // MODIFICAR    º
+        /*PROVEEDORES*/
+            // ALTA   º
+            // BAJA   º
+            // BUSQUEDA    º
+            // LISTADO     º
+            // MODIFICAR
+        /*DESCUENTO*/
+            /*CLIENTE*/
+                // ASIGNAR CHEQUE / PROMOCION A CLIENTE
+                // QUITAR CHEQUE / PROMOCION A CLIENTE
+                // CONSULTAR CHEQUE / PROMOCION CLIENTES
 
-    /**/
+
+    /*MENU PROVEEDOR*/
+        /*PERFIL*/
+            // DATOS   º
+            // MODIFICAR
 
 
     //Guardar estructuras en fichero

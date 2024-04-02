@@ -122,6 +122,55 @@ void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, i
 //Cabecera:
 //Precondicion:
 //Postcondicion:
+int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre, char email, int id, int op){
+
+    int i, control = 0, posicion = -1, opcion;
+
+    switch(op){
+        case 1:
+            for(i = 0; i < n_clientes && control == 0; i++){
+                if(strcmp(nombre, arrayProveedores[i].Nombre) == 0){
+                    printf("\nNombre: %s  Email: %s\n¿Es el proveedor que busca? (1.-Si / 2.-NO):  ", arrayProveedores[i].Nombre, arrayProveedores[i].email);
+                    scanf("%i", &opcion);
+                    while(opcion != 1 && opcion != 2){
+                        printf("\nError, valor no valido, vuelva a introducir (1.-Si / 2.-NO):  ");
+                        scanf("%i", &opcion);
+                    }
+                    if(opcion == 1){
+                        posicion = i;
+                        control = 1;
+                    }
+                }
+            }
+            break;
+        case 2:
+            for(i = 0; i < n_proveedores && control == 0; i++){
+                if(strcmp(email, arrayProveedores[i].email) == 0){
+                    posicion = i;
+                    control = 1;
+                }
+            }
+            break;
+        case 3:
+            for(i = 0; i < n_proveedores && control == 0; i++){
+                if(id == arrayProveedores[i].Id_empresa){
+                    posicion = i;
+                    control = 1;
+                }
+            }
+            break;
+    default: printf("\nError en la seleccion de modo de busqueda.");
+    }
+
+    printf("\nError, no se ha encontrado ningun cliente");
+
+    return posicion;
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion){
 
     int opcion;

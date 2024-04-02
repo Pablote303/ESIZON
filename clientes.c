@@ -7,6 +7,8 @@
 #include "proveedores.h"
 #include "descuentosclientes.h"
 
+#define MINIMO 5
+
 //Cabecera:
 //Precondicion:
 //Postcondicion:
@@ -204,6 +206,147 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char emai
 //Cabecera:
 //Precondicion:
 //Postcondicion:
+void ModificarCliente(Cliente *arrayClientes, int posicion){
+
+    int opcion;
+    char aux, modificacion[51], nombre[21], direccion[51], localidad[21], provincia[21], email[31], contrasena[16];
+
+    //ListarCliente(Cliente *arrayClientes, 0, 1, posicion);
+
+    do{
+        if(nombre != 'NULL') printf("\nNombre: %s\n", nombre);
+        else printf("\nNombre: %s\n", arrayClientes[posicion].Nomb_cliente);
+        if(email != 'NULL') printf("Email: %s\n", email);
+        else printf("Email: %s\n", arrayClientes[posicion].email);
+        if(contrasena != 'NULL') printf("Contrasena: %s\n", contrasena);
+        else printf("Contrasena: %s\n", arrayClientes[posicion].Contrasena);
+        if(direccion != 'NULL'){
+            printf("Direccion: %s\nLocalidad: %s\nProvicincia: %s\n", direccion, localidad, provincia);
+        }
+        else printf("Direccion: %s\nLocalidad: %s\nProvicincia: %s\n", arrayClientes[posicion].Dir_cliente, arrayClientes[posicion].Localidad, arrayClientes[posicion].Provincia);
+
+        printf("\n¿Que desea modificar?\n1.- Nombre\n2.- Email\n3.- Contrasena\n4.- Direccion\n5.- Salir y Guardar\n6.- Salir sin Guardar\n");
+        scanf("%i", &opcion);
+        while(opcion < 1 || opcion >5){
+            printf("")
+            scanf("%i", &opcion);
+        }
+        switch(opcion){
+
+        case 1:
+            printf("\nIntroduzca el nuevo nombre (maximo 20 caracteres): ");
+            scanf("%s", modificacion);
+            EliminarSaltoDeLinea(modificacion);
+            printf("%s\n¿Es correcto? (S/N): ");
+            scanf("%c", aux);
+            while(aux != 'S' && aux != 'N'){
+                printf("\nError, valor incorrecto, vuelva a introducir: ");
+                scanf("%c", aux);
+            }
+            if(aux == 'S'){
+                strncpy(nombre, modificacion, sizeof(nombre)-1);
+            }
+            break;
+        case 2:
+            printf("\nIntroduzca el nuevo email (maximo 30 caracteres): ");
+            scanf("%s", modificacion);
+            EliminarSaltoDeLinea(modificacion);
+            printf("%s\n¿Es correcto? (S/N): ");
+            scanf("%c", aux);
+            while(aux != 'S' && aux != 'N'){
+                printf("\nError, valor incorrecto, vuelva a introducir: ");
+                scanf("%c", aux);
+            }
+            if(aux == 'S'){
+                strncpy(email, modificacion, sizeof(email)-1);
+            }
+            break;
+        case 3:
+            printf("\nIntroduzca el nueva contrasena (maximo 15 caracteres): ");
+            scanf("%s", modificacion);
+            EliminarSaltoDeLinea(modificacion);
+            printf("%s\n¿Es correcto? (S/N): ");
+            scanf("%c", aux);
+            while(aux != 'S' && aux != 'N'){
+                printf("\nError, valor incorrecto, vuelva a introducir: ");
+                scanf("%c", aux);
+            }
+            if(aux == 'S'){
+                strncpy(contrasena, modificacion, sizeof(contrasena)-1);
+            }
+            break;
+        case 4:
+            printf("\nIntroduzca el nueva direccion (maximo 50 caracteres): ");
+            scanf("%s", modificacion);
+            EliminarSaltoDeLinea(modificacion);
+            printf("%s\n¿Es correcto? (S/N): ");
+            scanf("%c", aux);
+            while(aux != 'S' && aux != 'N'){
+                printf("\nError, valor incorrecto, vuelva a introducir: ");
+                scanf("%c", aux);
+            }
+            if(aux == 'S'){
+                strncpy(direccion, modificacion, sizeof(direccion)-1);
+                printf("\nIntroduzca el nueva localidad (maximo 20 caracteres): ");
+                scanf("%s", modificacion);
+                EliminarSaltoDeLinea(modificacion);
+                printf("%s\n¿Es correcto? (S/N): ");
+                scanf("%c", aux);
+                while(aux != 'S' && aux != 'N'){
+                    printf("\nError, valor incorrecto, vuelva a introducir: ");
+                    scanf("%c", aux);
+                }
+                if(aux == 'S'){
+                    strncpy(localidad, modificacion, sizeof(localidad)-1);
+                    printf("\nIntroduzca el nueva provincia (maximo 20 caracteres): ");
+                    scanf("%s", modificacion);
+                    EliminarSaltoDeLinea(modificacion);
+                    printf("%s\n¿Es correcto? (S/N): ");
+                    scanf("%c", aux);
+                    while(aux != 'S' && aux != 'N'){
+                        printf("\nError, valor incorrecto, vuelva a introducir: ");
+                        scanf("%c", aux);
+                    }
+                    if(aux == 'S'){
+                        strncpy(provincia, modificacion, sizeof(provincia)-1);
+                    }
+                    else{
+                        direccion = 'NULL';
+                        localidad = 'NULL';
+                    }
+                }
+                else direccion = 'NULL';
+
+            }
+            break;
+        case 5:
+            printf("\nGURDANDO...\n");
+            if(nombre != 'NULL') strncpy(arrayClientes[posicion].Nomb_cliente, nombre, sizeof(arrayClientes[posicion].Nomb_cliente)-1);
+            if(email != 'NULL') strncpy(arrayClientes[posicion].email, email, sizeof(arrayClientes[posicion].email)-1);
+            if(contrasena != 'NUll') strncpy(arrayClientes[posicion].Contrasena, contrasena, sizeof(arrayClientes[posicion].Contrasena)-1);
+            if(direccion != 'NULL'){
+                strncpy(arrayClientes[posicion].Dir_cliente, direccion, sizeof(arrayClientes[posicion].Dir_cliente)-1);
+                strncpy(arrayClientes[posicion].Localidad, localidad, sizeof(arrayClientes[posicion].Localidad)-1);
+                strncpy(arrayClientes[posicion].Provincia, provincia, sizeof(arrayClientes[posicion].Provincia)-1);
+            }
+            printf("GUARDADO.\NSaleindo..");
+            break;
+        case 6:
+            printf("Saliendo...");
+            break;
+        default:
+            printf("\nError en la seleccion de modificar...\nSaliendo...\n");
+            opcion = 5;
+            break;
+        }
+
+    }while(opcion != 5 && opcion != 6)
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion){
 
     int opcion;
@@ -220,6 +363,38 @@ void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion){
         printf("\nEl cliente se ha borrado...");
     }
     else printf("\nCancelado.\nVolviendo...");
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+void Cartera(Cliente *arrayClientes, int posicion, int operacion, int saldo){
+
+    int ;
+
+    switch(operacion){
+        case 0:
+            printf("El Saldo es de: %i €", arrayClientes[posicion].Cartera);
+            break;
+        case 1:
+            printf("El Saldo de %s es de: %i €", arrayClientes[posicion].Nomb_cliente, arrayClientes[posicion].Cartera);
+            break;
+        case 2:
+            arrayClientes[posicion].Cartera =- saldo;
+            break;
+        case 3:
+            printf("Introduce la cantidad a anadir: ");
+            scanf("%i", &saldo);
+            while(saldo < MINIMO){
+                printf("Error, cantidad introducida erronea, el saldo minimo a introducir es de %i.\nIntroduzca de nuevo: ", MINIMO);
+                scanf("%i", &saldo);
+            }
+            arrayClientes[posicion].Cartera =- saldo;
+            printf("\nEl nuevo saldo es de: %i", arrayClientes[posicion].Cartera);
+            break;
+    default: printf("\nError de operacion en cartera...\nVolviendo...");
+    }
 
 }
 
