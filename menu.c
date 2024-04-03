@@ -4,6 +4,8 @@
 
 #include "menu.h"
 #include "clientes.h"
+#include "proveedores.h"
+#include "descuentosclientes.h"
 
 //Cabecera:
 //Precondicion:

@@ -2,9 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 
+#include "proveedores.h"
 #include "clientes.h"
 #include "menu.h"
-#include "proveedores.h"
 #include "descuentosclientes.h"
 
 //Cabecera:
@@ -95,6 +95,7 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
     }
     // Cierre
     return nuevoarray;         //Devolvemos el array al original con los datos del nuevo Proveedor o como estaba al principio si no se registra
+
 
 }
 

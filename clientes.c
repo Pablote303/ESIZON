@@ -12,7 +12,7 @@
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
+Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
 
     Cliente *nuevoarray;
 
@@ -99,7 +99,7 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/){
 
 }
 
-int login(Cliente *arrayClientes int *id, int *n_clientes){
+int login(Cliente *arrayClientes, int *id, int *n_clientes){
 
     int perm = -1, cont = 0, posicion, control = 0, aux, n_clientes_aux, i = 0, intento = 0;
     char email_aux[21], contrasena_aux[9];

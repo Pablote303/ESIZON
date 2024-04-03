@@ -24,16 +24,16 @@
 	"clientes.h"
 	"menu.h"
 
-1710851564 source:c:\users\pablo\documents\universidad\mp\esizon\main.c
+1710855164 source:c:\users\pablo\documents\universidad\mp\esizon\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
 	"clientes.h"
 
-1710851564 c:\users\pablo\documents\universidad\mp\esizon\menu.h
+1710855164 c:\users\pablo\documents\universidad\mp\esizon\menu.h
 
-1710852650 c:\users\pablo\documents\universidad\mp\esizon\clientes.h
+1712140066 c:\users\pablo\documents\universidad\mp\esizon\clientes.h
 
 1710851564 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
 	<stdio.h>

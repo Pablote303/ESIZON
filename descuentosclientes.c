@@ -2,14 +2,14 @@
 #include<stdlib.h>
 #include<string.h>
 
+#include "descuentosclientes.h"
 #include "clientes.h"
 #include "menu.h"
 #include "proveedores.h"
-#include "descuentosclientes.h"
 
 
 
-DescuentoCliente* CargarDescuentosClietes(int *n_descuentoscliente){
+DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente){
 
     int n_lineas = 0, i;
     DescuentoCliente *descuentosclientes;
@@ -43,7 +43,7 @@ DescuentoCliente* CargarDescuentosClietes(int *n_descuentoscliente){
 
 }
 
-void GuardarEstrucutura(Cliente *descuentosclientes, int n_descuentoscliente){
+void GuardarEstrucutura(DescuentoCliente *descuentosclientes, int n_descuentoscliente){
 
     int i = 0;
 
