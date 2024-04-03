@@ -108,9 +108,10 @@ int login(Cliente *arrayClientes, int *id, int *n_clientes){
     n_clientes_aux = *n_clientes;
     n_proveedores_aux = *n_proveedores;
 
-    while(perm < 0){
-        printf("");
+    while(perm == -1){
+        printf("Introduzca usuario (email): ");
         scanf("%s", email_aux);
+        EliminarSaltoDeLinea(email_aux);
 
         if(BuscarCliente(arrayClientes, n_clientes_aux, 0, email_aux, 0, 2) != 1){
             perm = 2;
@@ -120,11 +121,27 @@ int login(Cliente *arrayClientes, int *id, int *n_clientes){
                 perm = arrayProveedores[posicion].Perfil_usuario;
             }
             else{
-                printf("\nError, usuario no encontrado, vuelva a intentarlo...");
+                printf("\nError, usuario no encontrado, vuelva a intentarlo... (Intentos: %i)", 3 - intento);
                 intento++;
-                if(intento > 3){
+            }
+        }
+        if(intentos >= 3){
+            perm = 10;
+            printf("\nUsuario no encontrado, intentos maximos alcanzdaos, vuelva a intentarlo mas tarde...")
+        }
+    }
 
-                }
+    for(intento = 0; intento < 3 && control == 0; intento++){
+        printf("Introduzca la contrasena: ");
+        scanf("%s", contrasena_aux);
+        EliminarSaltoDeLinea(contrasena_aux);
+
+        if(perm != 10 && perm != -1){
+            if(perm == 2){
+                //Comparar contrasena clientes
+            }
+            else{
+                //comparar contrasena proveedores
             }
         }
     }
