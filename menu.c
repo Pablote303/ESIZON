@@ -26,12 +26,13 @@ void menu(){
 
     /*INICIAL*/
         // INICIAR SESION
-        // CREAR CUENTA "SOLO CLIENTE"   º
+
+        // CREAR CUENTA "SOLO CLIENTE"   ï¿½
 
     /*MENU CLIENTES*/
         /*PERFIL*/
-            // DATOS  º
-            // MODIFICAR  º
+            // DATOS  ï¿½
+            // MODIFICAR  ï¿½
             // CONSULTAR CARTERA
             // ANADIR FONDOS
         /*DESCUENTOS*/
@@ -40,19 +41,19 @@ void menu(){
 
     /*MENU ADMIN*/
         /*PERFIL*/
-            // DATOS    º
+            // DATOS    ï¿½
             // MODIFICAR
         /*CLIENTES*/
-            // ALTA   º
-            // BAJA   º
-            // BUSQUEDA    º
-            // LISTADO   º
-            // MODIFICAR    º
+            // ALTA   ï¿½
+            // BAJA   ï¿½
+            // BUSQUEDA    ï¿½
+            // LISTADO   ï¿½
+            // MODIFICAR    ï¿½
         /*PROVEEDORES*/
-            // ALTA   º
-            // BAJA   º
-            // BUSQUEDA    º
-            // LISTADO     º
+            // ALTA   ï¿½
+            // BAJA   ï¿½
+            // BUSQUEDA    ï¿½
+            // LISTADO     ï¿½
             // MODIFICAR
         /*DESCUENTO*/
             /*CLIENTE*/
@@ -63,7 +64,7 @@ void menu(){
 
     /*MENU PROVEEDOR*/
         /*PERFIL*/
-            // DATOS   º
+            // DATOS   ï¿½
             // MODIFICAR
 
 

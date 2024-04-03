@@ -10,15 +10,15 @@
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int op){  // op == 0(Normal) / 1(ADMIN)
+Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int op){
 
     Proveedor *nuevoarray;
 
-    int control = 0, opcion, elminado = 0, permiso;
+    int control = 0, opcion, elminado = 0, permiso, proveedores;
     char nombre[21], email[31], contrasena[16];
 
     *n_proveedores += 1;
-    Proveedor = *n_proveedores;
+    proveedores = *n_proveedores;
     nuevoarray = (Proveedor*)realloc(arrayProveedores, (*n_proveedores) * sizeof(Proveedor));
 
     // Formulario registro
@@ -34,7 +34,7 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
             EliminarSaltoDeLinea(email);
             fflush(stdin);
         }
-*/
+        */
         //Formulario datos de Proveedor
         printf("Introduce contrasena (maximo 15 caracteres): ");
         fgets(contrasena, 16, stdin);
@@ -56,7 +56,7 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
         }
 
         // Validacion datos
-        printf("\n¿Son correctos los datos introducidos?");
+        printf("\n Son correctos los datos introducidos?");
         if(op == 1){
             if(permiso == 1) printf("Permisos: Cliente\n");
             else printf("Permisos: administrador\n");
@@ -72,18 +72,18 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
         if(opcion == 2) printf("Repita el formulario con los datos correctos.\n");
         else{
             if(opcion == 3){
-                *n_proveedores  -= 1;                //Si no se registra quitamos el Proveedor anadido al principio
-                memcpy(nuevoarray, arrayProveedores, *n_proveedores ;              //Si no se registras, remplazamos el array temporal por el original para que no se pierda ningun dato sin el nuevo Cliente registrado
+                *n_proveedores =- 1;                //Si no se registra quitamos el Proveedor anadido al principio
+                memcpy(nuevoarray, arrayProveedores, *n_proveedores) ;              //Si no se registras, remplazamos el array temporal por el original para que no se pierda ningun dato sin el nuevo Cliente registrado
                 control = 1;
             }
             else{
                 // Guardar en estructura
-                nuevoarray[*n_proveedores - 1].Id = nuevoarray[*n_proveedores  - 2].Id_empresa + 1;
+                nuevoarray[*n_proveedores - 1].Id_empresa = nuevoarray[*n_proveedores  - 2].Id_empresa + 1;
                 nuevoarray[*n_proveedores  - 1].Eliminado = 0;
 
                 strcpy(nuevoarray[*n_proveedores  - 1].email, email);
                 strcpy(nuevoarray[*n_proveedores  - 1].Contrasena, contrasena);
-                strcpy(nuevoarray[*n_proveedores  - 1].Nomb_Cliente, nombre);
+                strcpy(nuevoarray[*n_proveedores  - 1].Nombre, nombre);
 
                 nuevoarray[*n_proveedores  - 1].Perfil_usuario = permiso;  //Dinero inicial
                 /*if(permiso == 1) strcpy(nuevoarray[*n_clientes - 1].Perfil_usuario, "Proveedor");
@@ -93,11 +93,10 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
             }
         }
     }
-    // Cierre
-    return nuevoarray;         //Devolvemos el array al original con los datos del nuevo Proveedor o como estaba al principio si no se registra
 
-
+    return nuevoarray;
 }
+
 
 void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, int posicion){
 
@@ -114,8 +113,8 @@ void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, i
         }
     }
     else{
-        printf("Nombre: %s  Email: %s  C")
-        if(op == 1) printf("")
+        printf("Nombre: %s  Email: %s  C");
+        if(op == 1) printf("");
     }
 
 }
@@ -129,9 +128,9 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
 
     switch(op){
         case 1:
-            for(i = 0; i < n_clientes && control == 0; i++){
+            for(i = 0; i < n_proveedores && control == 0; i++){
                 if(strcmp(nombre, arrayProveedores[i].Nombre) == 0){
-                    printf("\nNombre: %s  Email: %s\n¿Es el proveedor que busca? (1.-Si / 2.-NO):  ", arrayProveedores[i].Nombre, arrayProveedores[i].email);
+                    printf("\nNombre: %s  Email: %s\n Es el proveedor que busca? (1.-Si / 2.-NO):  ", arrayProveedores[i].Nombre, arrayProveedores[i].email);
                     scanf("%i", &opcion);
                     while(opcion != 1 && opcion != 2){
                         printf("\nError, valor no valido, vuelva a introducir (1.-Si / 2.-NO):  ");
@@ -176,7 +175,7 @@ void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion)
 
     int opcion;
 
-    printf("Nombre: %s  Email: %s\n¿Desea eliminar el proveedor? (1.- SI / 2.- NO): ", arrayProveedores[posicion].Nombre, arrayProveedores[posicion].email);
+    printf("Nombre: %s  Email: %s\n Desea eliminar el proveedor? (1.- SI / 2.- NO): ", arrayProveedores[posicion].Nombre, arrayProveedores[posicion].email);
     scanf("%i", &opcion);
     while(opcion != 1 && opcion != 2){
         printf("\nError, valor introducido no valido, vuelva a introducirlo: ");
@@ -220,7 +219,7 @@ Proveedor *CargarProveedores(int *n_proveedores){
         EliminarSaltoDeLinea(perfil);
         if(strcmp(perfil, "administrador") == 0) proveedores[i].Perfil_usuario = 0;
         else proveedores[i].Perfil_usuario = 1;
-        //fscanf(f, "%[^\n]\n", &proveedores[i].Perfil_usuario);      //¿?¿?  Cambiar por sustitucion de enteros ¿?¿?
+        //fscanf(f, "%[^\n]\n", &proveedores[i].Perfil_usuario);      // ? ?  Cambiar por sustitucion de enteros  ? ?
         proveedores[i].Eliminado = 0;
     }
 
@@ -232,7 +231,7 @@ Proveedor *CargarProveedores(int *n_proveedores){
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-void GuardarEstrucutura(Proveedor *arrayProveedores, int n_proveedores){
+void GuardarEstructuraP(Proveedor *arrayProveedores, int n_proveedores){
 
     int i = 0;
 

@@ -1,44 +1,38 @@
 # depslib dependency file v1.0
-1710338718 source:c:\users\pablo\desktop\universidad\mp\esizon\main.c
+1712144135 source:c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"descuentosclientes.h"
+	"clientes.h"
+	"menu.h"
+	"proveedores.h"
+
+1712142312 source:c:\users\pablo\documents\universidad\mp\esizon\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
 	"clientes.h"
+	"proveedores.h"
+	"descuentosclientes.h"
 
-1710337350 c:\users\pablo\desktop\universidad\mp\esizon\menu.h
+1712142372 c:\users\pablo\documents\universidad\mp\esizon\menu.h
 
-1710937861 c:\users\pablo\desktop\universidad\mp\esizon\clientes.h
+1712144327 c:\users\pablo\documents\universidad\mp\esizon\clientes.h
 
-1710335118 source:c:\users\pablo\desktop\universidad\mp\esizon\menu.c
+1712144327 c:\users\pablo\documents\universidad\mp\esizon\proveedores.h
+
+1712144135 c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.h
+
+1712143486 source:c:\users\pablo\documents\universidad\mp\esizon\proveedores.c
+
+1712142592 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
 	"clientes.h"
-
-1710347379 source:c:\users\pablo\desktop\universidad\mp\esizon\clientes.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"clientes.h"
-	"menu.h"
-
-1710855164 source:c:\users\pablo\documents\universidad\mp\esizon\main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"menu.h"
-	"clientes.h"
-
-1710855164 c:\users\pablo\documents\universidad\mp\esizon\menu.h
-
-1712140066 c:\users\pablo\documents\universidad\mp\esizon\clientes.h
-
-1710851564 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"menu.h"
-	"clientes.h"
+	"proveedores.h"
+	"descuentosclientes.h"
 

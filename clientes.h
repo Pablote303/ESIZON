@@ -24,7 +24,7 @@ void ModificarCliente(Cliente *arrayClientes, int posicion);
 void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion);
 void Cartera(Cliente *arrayClientes, int posicion, int operacion, int saldo);
 Cliente* CargarClientes(int *n_clientes);
-void GuardarEstructura(Cliente *arrayClientes, int n_Clientes);
+void GuardarEstructuraC(Cliente *arrayClientes, int n_Clientes);
 int ContarLineas(FILE *f);
 void EliminarSaltoDeLinea(char *cadena);
 

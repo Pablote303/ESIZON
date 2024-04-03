@@ -1,3 +1,4 @@
+
 #ifndef PROVEEDORES_H_INCLUDED
 #define PROVEEDORES_H_INCLUDED
 
@@ -17,9 +18,9 @@ typedef struct{
 Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int op);
 void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, int posicion);
 int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre, char email, int id, int op);
-void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion)
+void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion);
 Proveedor* CargarProveedores(int *n_proveedores);
-void GuardarEstrucutura(Proveedor *arrayProveedores, int n_proveedores);
+void GuardarEstructuraP(Proveedor *arrayProveedores, int n_proveedores);
 
 
 #endif // PROVEEDORES_H_INCLUDED
