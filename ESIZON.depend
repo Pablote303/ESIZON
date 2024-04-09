@@ -36,3 +36,38 @@
 	"proveedores.h"
 	"descuentosclientes.h"
 
+1712153296 source:c:\users\pablo\desktop\universidad\mp\esizon\descuentosclientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"descuentosclientes.h"
+	"clientes.h"
+	"menu.h"
+	"proveedores.h"
+
+1712153296 c:\users\pablo\desktop\universidad\mp\esizon\descuentosclientes.h
+
+1712664848 c:\users\pablo\desktop\universidad\mp\esizon\clientes.h
+
+1710337350 c:\users\pablo\desktop\universidad\mp\esizon\menu.h
+
+1712153296 c:\users\pablo\desktop\universidad\mp\esizon\proveedores.h
+
+1712153296 source:c:\users\pablo\desktop\universidad\mp\esizon\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+	"clientes.h"
+	"proveedores.h"
+	"descuentosclientes.h"
+
+1712153296 source:c:\users\pablo\desktop\universidad\mp\esizon\proveedores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"proveedores.h"
+	"clientes.h"
+	"menu.h"
+	"descuentosclientes.h"
+

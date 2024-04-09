@@ -17,7 +17,7 @@ typedef struct{
 
 //Funciones publicas
 Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes/*, int op*/);
-int login(Cliente *arrayClientes, int *id, int *n_clientes);
+int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_clientes, int *n_proveedores);
 void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion);
 int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char email, int id, int op);
 void ModificarCliente(Cliente *arrayClientes, int posicion);

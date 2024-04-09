@@ -100,7 +100,7 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
 
 }
 
-int login(Cliente *arrayClientes, int *id, int *n_clientes){
+int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_clientes, int *n_proveedores){
 
     int perm = -1, cont = 0, posicion, control = 0, aux, n_clientes_aux, n_proveedores_aux, i = 0, intento = 0;
     char email_aux[21], contrasena_aux[9];
@@ -117,7 +117,7 @@ int login(Cliente *arrayClientes, int *id, int *n_clientes){
             perm = 2;
         }
         else{
-            if(BuscarProveedor() != -1){
+            if(BuscarProveedor(arrayProveedores, n_proveedores_aux, 0, email_aux, 0, 2) != -1){
                 perm = arrayProveedores[posicion].Perfil_usuario;
             }
             else{
@@ -126,27 +126,44 @@ int login(Cliente *arrayClientes, int *id, int *n_clientes){
             }
         }
         if(intentos >= 3){
-            perm = 10;
+            perm = 3;
             printf("\nUsuario no encontrado, intentos maximos alcanzdaos, vuelva a intentarlo mas tarde...")
         }
     }
 
-    for(intento = 0; intento < 3 && control == 0; intento++){
-        printf("Introduzca la contrasena: ");
-        scanf("%s", contrasena_aux);
-        EliminarSaltoDeLinea(contrasena_aux);
+    if(perm != 3 && perm != -1){
+        for(intento = 0; intento < 3 && control == 0; intento++){
+            printf("Introduzca la contrasena: ");
+            scanf("%s", contrasena_aux);
+            EliminarSaltoDeLinea(contrasena_aux);
 
-        if(perm != 10 && perm != -1){
             if(perm == 2){
                 //Comparar contrasena clientes
+                if(strcmp(contrasena_aux, arrayClientes[posicion].Contrasena) == 1){
+                    control == 1;
+                }
+                else{
+                    printf("Contrasena incorrecta.\n");
+                }
             }
             else{
                 //comparar contrasena proveedores
+                if(strcmp(contrasena_aux, arrayProveedores[posicion].Contrasena) == 1){
+                    control == 1;
+                    perm == arrayProveedores[posicion].Perfil_usuario;
+                }
+                else{
+                    printf("Contrasena incorrecta.\n");
+                }
+            }
+            if(intento == 3){
+                printf("\nIntentos de iniciar sesion superados...\n");
+                perm = -1;
             }
         }
     }
 
-    return perm;  //0 ADMIN, 1 PROVEEDOR, 2 CLIENTE, 3 ERROR NO EXISTE
+    return perm;  //0 ADMIN, 1 PROVEEDOR, 2 CLIENTE, 3 ERROR NO EXISTE, -1 CONTRASENA INCORRECTA
 
 }
 
@@ -253,7 +270,7 @@ void ModificarCliente(Cliente *arrayClientes, int posicion){
 
         printf("\n�Que desea modificar?\n1.- Nombre\n2.- Email\n3.- Contrasena\n4.- Direccion\n5.- Salir y Guardar\n6.- Salir sin Guardar\n");
         scanf("%i", &opcion);
-        while(opcion < 1 || opcion >5){
+        while(opcion < 1 || opcion >6){
             printf("");
             scanf("%i", &opcion);
         }

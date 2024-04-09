@@ -14,7 +14,7 @@ typedef struct{
 
 //Funciones publicas
 DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente);
-void GuardarEstrucutura(DescuentoCliente *descuentosclientes, int n_descuentoscliente);
+void GuardarEstrucuturaCD(DescuentoCliente *descuentosclientes, int n_descuentoscliente);
 
 
 #endif // DESCUENTOSCLIENTES_H_INCLUDED

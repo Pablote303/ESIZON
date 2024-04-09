@@ -7,8 +7,36 @@
 #include "menu.h"
 #include "proveedores.h"
 
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, int posicion){
 
 
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+void ListarDescuentosTotalClientes(DescuentoCliente *arrayDescuentosClientes, int n_descuestosclientes){
+
+
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int *n_descuentosclientes, int n_clientes){
+
+
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente){
 
     int n_lineas = 0, i;
@@ -43,7 +71,10 @@ DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente){
 
 }
 
-void GuardarEstrucutura(DescuentoCliente *descuentosclientes, int n_descuentoscliente){
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+void GuardarEstrucuturaCD(DescuentoCliente *descuentosclientes, int n_descuentoscliente){
 
     int i = 0;
 

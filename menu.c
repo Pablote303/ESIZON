@@ -7,12 +7,28 @@
 #include "proveedores.h"
 #include "descuentosclientes.h"
 
+crear_archivo(const char *nombre_archivo);
+
 //Cabecera:
 //Precondicion:
 //Postcondicion:
 void menu(){
 
-    int n_clientes, n_proveedores, n_descuentosclientes, posicion, permisos;
+    int n_clientes, n_proveedores, n_descuentosclientes, opcion, posicion, permisos;
+
+    if(INI() == 1){
+        crear_archivo("Clientes.txt");
+        crear_archivo("Productos.txt");
+        crear_archivo("Categorias.txt");
+        crear_archivo("Descuentos.txt");
+        crear_archivo("DescuentosClientes.txt");
+        crear_archivo("Lockers.txt");
+        crear_archivo("CompartimientosLockers.txt");
+        crear_archivo("Pedidos.txt");
+        crear_archivo("ProductosPedidos.txt");
+        crear_archivo("Transportistas.txt");
+        crear_archivo("Devoluciones.txt");
+    }
 
     //Carga de estructuras
     Cliente *arrayClientes;
@@ -25,24 +41,52 @@ void menu(){
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
 
     /*INICIAL*/
-        // INICIAR SESION
+        // INICIAR SESION       º
 
         // CREAR CUENTA "SOLO CLIENTE"   �
+
+    printf("Bienvenido a ESIZON\n\n");
+
+    do{
+        printf("1.- Iniciar sesion.\n2.- Registrarse.\n3.- Salir.\n");
+        scanf("%i", &opcion);
+
+        switch(opcion){
+            case 1:
+                permisos = login(*arrayClientes, *arrayProveedores, *posicion, *n_clientes, *n_proveedores);
+                if(perm == -1 || perm == 3) printf("\nVolviendo al menu...\n");
+                else{
+                    if(perm == 2) void MenuCliente(*arrayClientes, *n_clientes, permisos);
+                    else{
+                        if(perm == 1) void MenuProveedor(*arrayClientes, *arrayProveedores, *arrayDescuentosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos);
+                        if(perm == 0) void MenuAdmin(*arrayClientes, *arrayProveedores, *arrayDescuentosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos);
+                    }
+                }
+                break;
+            case 2:
+                arrayClientes = CrearCliente(arrayClientes, *n_clientes);
+                break;
+            case 3:
+                printf("\n\nCerrando el programa, adios...\n\n");
+                break;
+            default: printf("Error, opcion no valida, vuelva a introducir...\n\n");
+        }
+
+    } while(opcion != 3);
 
     /*MENU CLIENTES*/
         /*PERFIL*/
             // DATOS  �
             // MODIFICAR  �
-            // CONSULTAR CARTERA
-            // ANADIR FONDOS
+            // CONSULTAR CARTERA    º
+            // ANADIR FONDOS    º
         /*DESCUENTOS*/
             // CONSULTAR DESCUENTO CLIENTES
-    void MenuCliente(*arrayClientes, *n_clientes, permisos)
 
     /*MENU ADMIN*/
         /*PERFIL*/
             // DATOS    �
-            // MODIFICAR
+            // MODIFICAR    º
         /*CLIENTES*/
             // ALTA   �
             // BAJA   �
@@ -54,23 +98,24 @@ void menu(){
             // BAJA   �
             // BUSQUEDA    �
             // LISTADO     �
-            // MODIFICAR
+            // MODIFICAR    º
         /*DESCUENTO*/
             /*CLIENTE*/
                 // ASIGNAR CHEQUE / PROMOCION A CLIENTE
                 // QUITAR CHEQUE / PROMOCION A CLIENTE
                 // CONSULTAR CHEQUE / PROMOCION CLIENTES
-    void MenuAdmin(*arrayClientes, *arrayProveedores, *arrayDescuentosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos);
 
 
     /*MENU PROVEEDOR*/
         /*PERFIL*/
             // DATOS   �
-            // MODIFICAR
-    void MenuProveedor(*arrayClientes, *arrayProveedores, *arrayDescuentosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos);
+            // MODIFICAR    º
 
 
     //Guardar estructuras en fichero
+    GuardarEstructuraC(arrayClientes, n_clientes);
+    GuardarEstructuraP(arrayProveedores, n_clientes);
+    GuardarEstrucuturaCD(arrayDescuentosClientes, n_descuentosclientes);
 
 
     return 0;
@@ -247,8 +292,65 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                 break;
             default:
                 printf("Error, la opcion no es valida, vuelva a introducir.\n\n");
-        }
+
 
     } while(opcion != 10);
 
+}
+
+//Cabecera: entero INI()
+//Precondicion:
+//Postcondicion:
+int INI(){
+
+    int control = 0;
+    char contrasena[9];
+
+    FILE *f;
+
+    f = fopen("AdminProv.txt","r");
+    if(f == NULL){
+        control = 1;
+
+        f = fopen("AdminProv.txt", "w");
+
+        printf("Iniciando programa, creando archivos...\nIntroduce la contrasena para el usuario root: ");
+        scanf("%s", contrasena);
+        fflush(stdin);
+
+        fputs("0000001", f);
+        fputc('-', f);
+        fputs("ROOT, f);
+        fputc('-', f);
+        fputs("root@esizon.com", f);
+        fputc('-', f);
+        fputs(crontrasena, f);
+        fputc('-', f);
+        puts("administrador", f);
+
+        fclose(f);
+    }
+    else fclose(f);
+
+    return control;
+
+}
+
+//Cabecera: funcion crear_archivo(E cadena: nombre_archivo)
+//Precondicion: debe recibir una cadena de caracteres
+//Postcondicion: si el archivo no existe lo crea sin contenido
+void crear_archivo(const char *nombre_archivo){
+
+    FILE* f;
+
+    f = fopen(nombre_archivo, "r");
+    if (f == NULL) {
+        f = fopen(nombre_archivo, "w");
+        fclose(f);
+        printf("El archivo %s ha sido creado.\n", nombre_archivo);
+    }
+    else{
+        fclose(f);
+        printf("El archivo %s ya existe.\n", nombre_archivo);
+    }
 }

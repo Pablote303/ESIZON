@@ -171,6 +171,136 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
 //Cabecera:
 //Precondicion:
 //Postcondicion:
+void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posicion, in op){
+
+    int opcion;
+    char aux, modificacion[51], nombre[21], email[31], contrasena[16];
+
+    memset(modificacion, '\0', sizeof(modificacion));
+    memset(nombre, '\0', sizeof(nombre));
+    memset(email, '\0', sizeof(email));
+    memset(contrasena, '\0', sizeof(contrasena));
+
+    switch(op){
+        case 1 && 2:
+            do{
+                if(nombre != 'NULL') printf("\nNombre: %s\n", nombre);
+                else printf("\nNombre: %s\n", arrayProveedores[posicion].Nombre);
+                if(email != 'NULL') printf("Email: %s\n", email);
+                else printf("Email: %s\n", arrayProveedores[posicion].Eliminado);
+                if(contrasena != 'NULL') printf("Contrasena: %s\n", contrasena);
+                else if(op == 2) printf("Contrasena: %s\n", arrayProveedores[posicion].Contrasena);
+
+                printf("\n�Que desea modificar?\n1.- Nombre\n2.- Email\n3.- Contrasena\n4.- Salir y Guardar\n5.- Salir sin Guardar\n");
+                scanf("%i", &opcion);
+                while(opcion < 1 || opcion >5){
+                    printf("");
+                    scanf("%i", &opcion);
+                }
+                switch(opcion){
+
+                case 1:
+                    printf("\nIntroduzca el nuevo nombre (maximo 20 caracteres): ");
+                    scanf("%s", modificacion);
+                    EliminarSaltoDeLinea(modificacion);
+                    printf("%s\n�Es correcto? (S/N): ");
+                    scanf("%c", aux);
+                    while(aux != 'S' && aux != 'N'){
+                        printf("\nError, valor incorrecto, vuelva a introducir: ");
+                        scanf("%c", aux);
+                    }
+                    if(aux == 'S'){
+                        strncpy(nombre, modificacion, sizeof(nombre)-1);
+                    }
+                    break;
+                case 2:
+                    printf("\nIntroduzca el nuevo email (maximo 30 caracteres): ");
+                    scanf("%s", modificacion);
+                    EliminarSaltoDeLinea(modificacion);
+                    printf("%s\n�Es correcto? (S/N): ");
+                    scanf("%c", aux);
+                    while(aux != 'S' && aux != 'N'){
+                        printf("\nError, valor incorrecto, vuelva a introducir: ");
+                        scanf("%c", aux);
+                    }
+                    if(aux == 'S'){
+                        strncpy(email, modificacion, sizeof(email)-1);
+                    }
+                    break;
+                case 3:
+                    printf("\nIntroduzca el nueva contrasena (maximo 15 caracteres): ");
+                    scanf("%s", modificacion);
+                    EliminarSaltoDeLinea(modificacion);
+                    printf("%s\n�Es correcto? (S/N): ");
+                    scanf("%c", aux);
+                    while(aux != 'S' && aux != 'N'){
+                        printf("\nError, valor incorrecto, vuelva a introducir: ");
+                        scanf("%c", aux);
+                    }
+                    if(aux == 'S'){
+                        strncpy(contrasena, modificacion, sizeof(contrasena)-1);
+                    }
+                    break;
+                case 4:
+                    printf("\nGURDANDO...\n");
+                    if(nombre != 'NULL') strncpy(arrayProveedores[posicion].Nombre, nombre, sizeof(arrayProveedores[posicion].Nombre)-1);
+                    if(email != 'NULL') strncpy(arrayProveedores[posicion].email, email, sizeof(arrayProveedores[posicion].email)-1);
+                    if(contrasena != 'NUll') strncpy(arrayProveedores[posicion].Contrasena, contrasena, sizeof(arrayProveedores[posicion].Contrasena)-1);
+                    printf("GUARDADO.\NSaleindo..");
+                    break;
+                case 5:
+                    printf("Saliendo...");
+                    break;
+                default:
+                    printf("\nError en la seleccion de modificar...\nSaliendo...\n");
+                    opcion = 5;
+                    break;
+                }
+
+            }while(opcion != 5 && opcion != 6);
+            break;
+        case 3:
+            do{
+                printf("\nPor normativa de la empresa todo administrador tendra como nombre ESIZON\ny no podra modificar su email administrativo.\n\nID: %04i\nNombre: %s\n", arrayProveedores[posicion].Id_empresa, arrayProveedores[posicion].Nombre);
+                printf("Email: %s\n", arrayProveedores[posicion].email);
+                if(contrasena != 'NULL') printf("Contrasena: %s\n", contrasena);
+                else printf("Contrasena: %s\n", arrayProveedores[posicion].Contrasena);
+
+                printf("\n¿Desea modificar su contrasena?\n1.- Si\n2.- No");
+                scanf("%i", &opcion);
+                while(opcion < 1 || opcion > 2){
+                    printf("Error, opcion no valida...\nVuelva a introducir: ");;
+                    scanf("%i", &opcion);
+
+                if(opcion == 1){
+                    printf("Introduzca la nueva contrasena (15 carecteres maximos): ");
+                    scanf("%s", modificacion);
+                    EliminarSaltoDeLinea(modificacion);
+
+                    printf("\n¿Es correcto?  Contrasena: %s\n1.- Si\n2.- No", modificacion);
+                    while(opcion < 1 || opcion > 2){
+                        printf("Error, opcion no valida...\nVuelva a introducir: ");;
+                        scanf("%i", &opcion);
+                    }
+
+                    if(opcion == 1){
+                        f(modificacion != 'NUll') strncpy(arrayProveedores[posicion].Contrasena, modificacion, sizeof(arrayProveedores[posicion].Contrasena)-1);
+                    }
+                }
+                else{
+                    printf("Saliendo....");
+
+                }
+
+            }while(opcion != 2);
+            break;
+    }
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion){
 
     int opcion;
