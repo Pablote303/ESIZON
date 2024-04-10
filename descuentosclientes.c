@@ -10,25 +10,74 @@
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, int posicion){
+void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int n_descuentosclientes, int posicion){
 
+    int i, posicion, filas, x = 0, pag = 0;
 
+    printf("Introduce el numero de descuentos a mostrar por pagina (5 a 50): ");
+    scanf("%i", &pagina);
+    while(filas < 5 || filas > 50){
+        printf("Valor introducido no valido, vuelva a introducir la cantidad: ");
+        scanf("%i", &filas);
+    }
+
+    for(i = 0; i < n_descuentosclientes; i++){
+        if(arrayDescuentosClientes[i].Id_cliente == arrayClientes[posicion].Id_cliente){
+            printf("%s - %i - Asignado: %i/%i/%i - Caduca: %i/%i/%i - Estado:", arrayClientes[posicion].email, arrayDescuentosClientes[i].Id_Cod, arrayDescuentosClientes[i].Fechar_asig[0], arrayDescuentosClientes[i].Fechar_asig[1], arrayDescuentosClientes[i].Fechar_asig[2], arrayDescuentosClientes[i].Fecha_cad[0], arrayDescuentosClientes[i].Fecha_cad[1], arrayDescuentosClientes[i].Fecha_cad[2]);
+            if(arrayDescuentosClientes[i].Estado == 0) printf(" No aplicado\n");
+            else printf(" Aplicado\n");
+
+            x++;
+            if(x == filas-1){
+                printf("\nPagina %i de %i", x+1, n_descuestosclientes/filas);
+                printf("\nPulse cualquier tecla para pasar pagina...\n");
+                pag++;
+                getchar();
+                x = 0;
+                system("cls");
+            }
+        }
+    }
 
 }
 
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-void ListarDescuentosTotalClientes(DescuentoCliente *arrayDescuentosClientes, int n_descuestosclientes){
+void ListarDescuentosTotalClientes(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int n_descuestosclientes, int n_clientes){
 
+    int i, posicion, filas, x = 0, pag = 0;
 
+    printf("Introduce el numero de descuentos a mostrar por pagina (5 a 50): ");
+    scanf("%i", &filas);
+    while(filas < 5 || filas > 50){
+        printf("Valor introducido no valido, vuelva a introducir la cantidad: ");
+        scanf("%i", &filas);
+    }
+
+    for(i = 0; i < n_descuestosclientes; i++){
+        posicion = BuscarCliente(Cliente *arrayClientes, n_clientes, 0, 0, arrayDescuentosClientes[i].Id_cliente, 3);
+        printf("%s - %i - Asignado: %i/%i/%i - Caduca: %i/%i/%i - Estado:", arrayClientes[posicion].email, arrayDescuentosClientes[i].Id_Cod, arrayDescuentosClientes[i].Fechar_asig[0], arrayDescuentosClientes[i].Fechar_asig[1], arrayDescuentosClientes[i].Fechar_asig[2], arrayDescuentosClientes[i].Fecha_cad[0], arrayDescuentosClientes[i].Fecha_cad[1], arrayDescuentosClientes[i].Fecha_cad[2]);
+        if(arrayDescuentosClientes[i].Estado == 0) printf(" No aplicado\n");
+        else printf(" Aplicado\n");
+
+        x++;
+        if(x == filas-1){
+            printf("\nPagina %i de %i", x+1, n_descuestosclientes/filas);
+            printf("\nPulse cualquier tecla para pasar pagina...\n");
+            pag++;
+            getchar();
+            x = 0;
+            system("cls");
+        }
+    }
 
 }
 
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int *n_descuentosclientes, int n_clientes){
+DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int *n_descuentosclientes, int n_clientes, int posicion, int op){
 
 
 
