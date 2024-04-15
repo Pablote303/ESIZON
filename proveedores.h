@@ -9,7 +9,6 @@ typedef struct{
     char email[31];
     char Contrasena[16];
     int Perfil_usuario;         // 0(administrador) / 1(provedor)
-    //char Perfil_usuario[13];    // O int Perfil_usuario == 0(administrador) / 1(provedor)
     int Eliminado;
 
 } Proveedor;

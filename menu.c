@@ -36,18 +36,14 @@ void menu(){
 
     //Carga de estructuras
     Cliente *arrayClientes;
-    arrayClientes = CargarClientes(&n_clientes);
+    arrayClientes = CargarClientes(&n_clientes); printf("\n *-*- clientes: %i -*-* \n", n_clientes);
 
     Proveedor *arrayProveedores;
-    arrayProveedores = CargarProveedores(&n_proveedores);
+    arrayProveedores = CargarProveedores(&n_proveedores); printf("\n *-*- proveedores: %i -*-* \n", n_proveedores);
 
     DescuentoCliente *arrayDescuentosClientes;
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
-
-    /*INICIAL*/
-        // INICIAR SESION       º
-
-        // CREAR CUENTA "SOLO CLIENTE"   �
+printf("\n-- prueba: %s --\n", arrayProveedores[0].Contrasena);
 
     printf("Bienvenido a ESIZON\n\n");
 
@@ -306,12 +302,40 @@ int INI(){
         fputc('-', f);
         fputs(contrasena, f);
         fputc('-', f);
+        fputs("admin", f);
+
+        fclose(f);
+    }
+    else fclose(f);
+/*
+    f = fopen("AdminProv.txt","r");
+    if(f == NULL){
+        control = 1;
+
+        f = fopen("AdminProv.txt", "w");
+
+        fputs("0000001", f);
+        fputc('-', f);
+        fputs("ROOT", f);
+        fputc('-', f);
+        fputs("ESIZON", f);
+        fputc('-', f);
+        fputs("ESIZON", f);
+        fputc('-', f);
+        fputs("ESIZON", f);
+        fputc('-', f);
+        fputs("root@cliente.com", f);
+        fputc('-', f);
+        fputs(contrasena, f);
+        fputc('-', f);
         fputs("administrador", f);
 
         fclose(f);
     }
     else fclose(f);
 
+    printf("\nSe ha generado los perfiles:\nAdmin: root@esizon.com\nCliente: root@cliente.com\nAmbas con misma contrasena.\n");
+*/
     return control;
 
 }

@@ -327,7 +327,7 @@ void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion)
 Proveedor *CargarProveedores(int *n_proveedores){
 
     int n_lineas = 0, i;
-    char perfil[13];
+    char perfil[13], *ad = "admin";
     Proveedor *proveedores;
     FILE *f;
 
@@ -346,12 +346,18 @@ Proveedor *CargarProveedores(int *n_proveedores){
         fscanf(f, "%[^-]-", proveedores[i].Nombre);
         fscanf(f, "%[^-]-", proveedores[i].email);
         fscanf(f, "%[^-]-", proveedores[i].Contrasena);
-        fscanf(f, "%[^\n]\n", perfil);
-        EliminarSaltoDeLinea(perfil);
-        if(strcmp(perfil, "administrador") == 0) proveedores[i].Perfil_usuario = 0;
-        else proveedores[i].Perfil_usuario = 1;
-        //fscanf(f, "%[^\n]\n", &proveedores[i].Perfil_usuario);      // ? ?  Cambiar por sustitucion de enteros  ? ?
+        fscanf(f, "%[^\n]\n", perfil); printf("/*/*/ %s /*/*/*", perfil);
+        //EliminarSaltoDeLinea(perfil);
+        fflush(stdin);
+        if(strcmp(perfil, ad) == 0){
+            proveedores[i].Perfil_usuario = 0;
+        }
+        else {
+            proveedores[i].Perfil_usuario = 1;
+        }
         proveedores[i].Eliminado = 0;
+fflush(stdin);
+        printf("\n.. %07i - %s - %s - %s - %i|| Eliminado: %i  ..\n", proveedores[i].Id_empresa, proveedores[i].Nombre, proveedores[i].email, proveedores[i].Contrasena, proveedores[i].Perfil_usuario, proveedores[i].Eliminado);
     }
 
     fclose(f);
@@ -368,7 +374,7 @@ void GuardarEstructuraP(Proveedor *arrayProveedores, int n_proveedores){
 
     FILE *f;
 
-    f = fopen("Proveedores.txt","w");      //Abrimos el archivo el modo escritura
+    f = fopen("AdminProv.txt","w");      //Abrimos el archivo el modo escritura
     if(f == NULL) printf("\nError al abrir Proveedores.txt");
 
     while(i < n_proveedores){

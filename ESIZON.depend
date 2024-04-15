@@ -50,7 +50,7 @@
 
 1710337350 c:\users\pablo\desktop\universidad\mp\esizon\menu.h
 
-1712153296 c:\users\pablo\desktop\universidad\mp\esizon\proveedores.h
+1713179346 c:\users\pablo\desktop\universidad\mp\esizon\proveedores.h
 
 1713171454 source:c:\users\pablo\desktop\universidad\mp\esizon\main.c
 	<stdio.h>
@@ -61,14 +61,14 @@
 	"clientes.h"
 	"descuentosclientes.h"
 
-1713171367 source:c:\users\pablo\desktop\universidad\mp\esizon\proveedores.c
+1713181453 source:c:\users\pablo\desktop\universidad\mp\esizon\proveedores.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"proveedores.h"
 	"descuentosclientes.h"
 
-1713171462 source:c:\users\pablo\desktop\universidad\mp\esizon\clientes.c
+1713178336 source:c:\users\pablo\desktop\universidad\mp\esizon\clientes.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -76,7 +76,7 @@
 	"clientes.h"
 	"descuentosclientes.h"
 
-1713171606 source:c:\users\pablo\desktop\universidad\mp\esizon\menu.c
+1713181653 source:c:\users\pablo\desktop\universidad\mp\esizon\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
