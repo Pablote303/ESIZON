@@ -74,43 +74,6 @@ void menu(){
 
     } while(opcion != 3);
 
-    /*MENU CLIENTES*/
-        /*PERFIL*/
-            // DATOS  �
-            // MODIFICAR  �
-            // CONSULTAR CARTERA    º
-            // ANADIR FONDOS    º
-        /*DESCUENTOS*/
-            // CONSULTAR DESCUENTO CLIENTES
-
-    /*MENU ADMIN*/
-        /*PERFIL*/
-            // DATOS    �
-            // MODIFICAR    º
-        /*CLIENTES*/
-            // ALTA   �
-            // BAJA   �
-            // BUSQUEDA    �
-            // LISTADO   �
-            // MODIFICAR    �
-        /*PROVEEDORES*/
-            // ALTA   �
-            // BAJA   �
-            // BUSQUEDA    �
-            // LISTADO     �
-            // MODIFICAR    º
-        /*DESCUENTO*/
-            /*CLIENTE*/
-                // ASIGNAR CHEQUE / PROMOCION A CLIENTE
-                // QUITAR CHEQUE / PROMOCION A CLIENTE
-                // CONSULTAR CHEQUE / PROMOCION CLIENTES
-
-
-    /*MENU PROVEEDOR*/
-        /*PERFIL*/
-            // DATOS   �
-            // MODIFICAR    º
-
 
     //Guardar estructuras en fichero
     GuardarEstructuraC(arrayClientes, n_clientes);

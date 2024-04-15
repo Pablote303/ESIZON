@@ -8,8 +8,8 @@
 #include "descuentosclientes.h"
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: Cargada e inicializada la estructura de proveedores, numero de proveedores/administradores, y el tipo de registro
+//Postcondicion: Devuelve a estrutura el nuevo proveedor/administrador registrado
 Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int op){
 
     Proveedor *nuevoarray;
@@ -28,7 +28,8 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
         EliminarSaltoDeLinea(email);
         fflush(stdin);
 
-        /*while(BuscarCliente(email, arrayClientes, Clientes-1) != -1){        //Comparar que no exista otro Cliente igual
+        //Revisar ERROR
+        /*while(BuscarCliente() != -1){        //Comparar que no exista otro Cliente igual
             printf("\nEl Cliente introducido ya existe, vuelva a introducir otro (maximo 5 caracteres): ");
             scanf("%s", email);
             EliminarSaltoDeLinea(email);
@@ -97,7 +98,9 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
     return nuevoarray;
 }
 
-
+//Cabecera:
+//Precondicion: estructura cargada e inicializada, numero de proveedores/administradores, al menos un administrador registrado
+//Postcondicion: devuelve en pantalla el listado de clientes y sus datos (segun quien los visualice)
 void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, int posicion){
 
     int i;
@@ -120,8 +123,8 @@ void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, i
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estructura cargada e inicializada, numero de proveedores/clientes y recibir al menos de uno de estos datos: email, nombre o id
+//Postcondicion: devuelve la posicion del proveedor/administrador o -1 si no existe
 int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre, char email, int id, int op){
 
     int i, control = 0, posicion = -1, opcion;
@@ -169,8 +172,8 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estrucutura cargada e inicializada y recibe la posicion del proveedor/administrador
+//Postcondicion: modifica los datos en estructura de datos del proveedor/administrador deseado
 void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posicion, in op){
 
     int opcion;
@@ -299,8 +302,8 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estructura cargada e inicializada, numero de proveedores, y la posicion del proveedor/administrador a eliminar.
+//Postcondicion: elimina el proveedor/administrador, hasta que no finalice el programa aparecera en la estructura pero sera inaccesible
 void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion){
 
     int opcion;
@@ -321,8 +324,8 @@ void EliminarProv(Proveedor *arrayProveedores, int *n_proveedores, int posicion)
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: Debe existir el fichero proveedores.txt
+//Postcondicion: Carga la estructura de proveedores.txt y devuelve el numero de preveedores y administradores registrados
 Proveedor *CargarProveedores(int *n_proveedores){
 
     int n_lineas = 0, i;
@@ -359,8 +362,8 @@ Proveedor *CargarProveedores(int *n_proveedores){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: debe existir el fichero proveedores.txt
+//Postcondicion: guarda la estructura de clientes en el fichero con el formato deseado
 void GuardarEstructuraP(Proveedor *arrayProveedores, int n_proveedores){
 
     int i = 0;

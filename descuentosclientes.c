@@ -10,6 +10,127 @@
 //Cabecera:
 //Precondicion:
 //Postcondicion:
+DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arraDescuentos, int *n_descuentosclientes, int n_clientes, int pos_des, int posicion, int op, int asigVec[3], int cadVec[3]){
+
+    DescuentoCliente *nuevoarray;
+
+    int control = 0, opcion, elminado = 0, permiso, descuentocliente, asignacion[3], caducidad[3];
+    char , , ;
+
+    *n_descuentosclientes += 1;
+    descuentocliente = *n_descuentosclientes;
+    nuevoarray = (DescuentoCliente*)realloc(arrayDescuentosClientes, (*n_descuentosclientes) * sizeof(DescuentoCliente));
+
+    // Formulario registro
+    while(control == 0){
+        if(op == 1){        //Modo automatico, se envian datos, generalizado para aplicar descuentos a varios clientes
+            control = 1;
+        }
+        else{               //Modo manual, se aplica descuento cliente a cliente
+            printf("Introduce fecha de asignacion: ");  //Seria automatica pero no esta implementado sistema de hora y dia      /*Colocar*/fflush(stdin);
+            printf("\nDia(dd): "); scanf("%i", &asignacion[0]);
+            printf("Mes (mm): "); scanf("%i", &asignacion[1]);
+            printf("Ano (aaaa): "); scanf("%i", &asignacion[2]);
+
+            printf("Introduce fecha de caducidad: ");
+            printf("\nDia(dd): "); scanf("%i", &caducidad[0]);
+            printf("Mes (mm): "); scanf("%i", &caducidad[1]);
+            printf("Ano (aaaa): "); scanf("%i", &caducidad[2]);
+
+            // Validacion datos
+            system("cls");
+            printf("\n Son correctos los datos introducidos?\nAsignacio: ( %i / %i / %i )\nCaducidad: ( %i / %i / %i )\n\n1.- Si\n2.- No", asignacion[0], asignacion[1], asignacion[2], caducidad[0], caducidad[1], caducidad[2]);
+            scanf("%i", &control);
+            while(control < 1 && control > 2){
+                printf("Error, vuelva a introducir");
+                scanf("%i", &control);
+            }
+
+        }
+
+        if(control = 1){
+            nuevoarray[*n_descuentosclientes - 1].Id_Cod = arraDescuentos[pos_des]./*cod_descuento*/;
+            nuevoarray[*descuentocliente - 1].Id_cliente = arrayClientes[posicion].Id_cliente;
+            nuevoarray[*descuentocliente - 1].Estado = 0;
+            if(op == 1){
+                nuevoarray[*descuentocliente - 1].Fechar_asig[0] = asigVec[0]; nuevoarray[*descuentocliente - 1].Fechar_asig[1] = asigVec[1]; nuevoarray[*descuentocliente - 1].Fechar_asig[2] = asigVec[1]
+                nuevoarray[*descuentocliente - 1].Fecha_cad[0] = cadVec[0]; nuevoarray[*descuentocliente - 1].Fecha_cad[1] = cadVec[1]; nuevoarray[*descuentocliente - 1].Fecha_cad[2] = cadVec[2];
+            }
+            else{
+                nuevoarray[*descuentocliente - 1].Fechar_asig[0] = asignacion[0]; nuevoarray[*descuentocliente - 1].Fechar_asig[1] = asignacion[1]; nuevoarray[*descuentocliente - 1].Fechar_asig[2] = asignacion[1]
+                nuevoarray[*descuentocliente - 1].Fecha_cad[0] = caducidad[0]; nuevoarray[*descuentocliente - 1].Fecha_cad[1] = caducidad[1]; nuevoarray[*descuentocliente - 1].Fecha_cad[2] = caducidad[2];
+            }
+
+            nuevoarray[*n_descuentosclientes  - 1].Eliminado = 0;
+
+        }
+        else{
+            *n_descuentosclientes =- 1;                //Si no se registra eliminamos el registro del descuento al cliente
+            memcpy(nuevoarray, arrayDescuentosClientes, *n_descuentosclientes) ;              //Si no se registras, remplazamos el array temporal por el original para que no se pierda ningun dato sin el nuevo descuento del Cliente registrado
+            printf("Cancelada la aplicacion de descuento a la cuenta del cliente...\n");
+        }
+    }
+
+    return nuevoarray;
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+int BuscarDescuentoCliente(DescuentoCliente *arrayDescuentoCliente, Cliente *arrayClientes, int pos_cliente, int n_descuentosclientes, char descuento){
+
+    int i, posicion = -1;
+
+    for(i = 0; i < n_descuentosclientes; i++){
+        if((strcmp(descuento, arrayDescuentoCliente[i].Id_Cod) == 1)&& arrayClientes[pos_cliente].Id_cliente == arrayDescuentoCliente[i].Id_cliente){
+            posicion = i;
+            i = n_descuentosclientes;
+        }
+    }
+
+    return posicion
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
+int AplicarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arrayDescuento, Proveedor *arraProveedores, int n_descuentosclientes, int n_clientes, char descuento, int posicion, int id_desc, int pos_prov){
+
+    int Comprobar = 0, pos_descuento;
+
+    pos_decuento = BuscarDescuentoCliente(arrayDescuentosClientes, arrayClientes, posicion, n_descuentosclientes, descuento);
+
+    if(strcmp("todos", arrayDescuento[pos_decuento]./*Aplicabilidad*/) == 1){
+        arrayDescuentosClientes[posicion].Estado = 1;
+        Comprobar = 1;
+
+        printf("El descuento %s se ha aplicado\n", arrayDescuentosClientes[posicion].Id_Cod);
+    }
+    else{
+        if(strcmp("ESIZON", arrayDescuento[id_desc]./*Aplcabilidad*/) == 1){
+            if(strcmp("ESIZON", arraProveedores[pos_prov].Nombre) == 1){
+                arrayDescuentosClientes[posicion].Estado = 1;
+                Comprobar = 1;
+
+                printf("El descuento %s se ha aplicado.\n", arrayDescuentosClientes[posicion].Id_Cod);
+            }
+            else{
+                printf("Este descuento no es valido para este proveedor.\n");
+                Comprobar = 0;
+            }
+        }
+        else printf("El descuento %s no es posible aplicarlo.\n");
+    }
+
+    return Comprobar;
+
+}
+
+//Cabecera:
+//Precondicion:
+//Postcondicion:
 void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int n_descuentosclientes, int posicion){
 
     int i, posicion, filas, x = 0, pag = 0;
@@ -75,17 +196,8 @@ void ListarDescuentosTotalClientes(DescuentoCliente *arrayDescuentosClientes, Cl
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
-DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int *n_descuentosclientes, int n_clientes, int posicion, int op){
-
-
-
-}
-
-//Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: Debe existir el fichero descuentosclientes.txt
+//Postcondicion: Carga la estructura de descuentosclientes.txt y devuelve el numero de descuentos de clientes registrados
 DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente){
 
     int n_lineas = 0, i;
@@ -121,8 +233,8 @@ DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: debe existir el fichero descuentosclientes.txt
+//Postcondicion: guarda la estructura de descuento clientes en el fichero con el formato deseado
 void GuardarEstrucuturaCD(DescuentoCliente *descuentosclientes, int n_descuentoscliente){
 
     int i = 0;

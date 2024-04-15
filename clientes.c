@@ -11,8 +11,8 @@
 #define MINIMO 5
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: Cargada e inicializada la estructura de Clientes.txt, numero de clientes totales
+//Postcondicion: Crea un nuevo registro de cliente y lo añade a la estructura
 Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
 
     Cliente *nuevoarray;
@@ -31,13 +31,13 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
         EliminarSaltoDeLinea(email);
         fflush(stdin);
 
-        /*while(BuscarCliente(email, arrayClientes, Clientes-1) != -1){        //Comparar que no exista otro Cliente igual
+        while(BuscarCliente(arrayClientes, n_clientes, 0, email, 0, 2) != -1){        //Comparar que no exista otro Cliente igual
             printf("\nEl Cliente introducido ya existe, vuelva a introducir otro (maximo 5 caracteres): ");
             scanf("%s", email);
             EliminarSaltoDeLinea(email);
             fflush(stdin);
         }
-*/
+
         //Formulario datos de Cliente
         printf("Introduce contrasena (maximo 15 caracteres): ");
         fgets(contrasena, 16, stdin);
@@ -100,6 +100,9 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
 
 }
 
+// Cabecera:
+// Precondicion: estructura cargada e inicializada, debe existir al menos un administrador, numero de cientes sin ser necesario que exista uno
+// Poscondicion: devuelve la posicion y permisos, del cliente, proveedor o administrador
 int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_clientes, int *n_proveedores){
 
     int perm = -1, cont = 0, posicion, control = 0, aux, n_clientes_aux, n_proveedores_aux, i = 0, intento = 0;
@@ -168,8 +171,8 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estructura cargada e inicializada, numero de clientes
+//Postcondicion: devuelve en pantalla el listado de clientes y sus datos (segun quien los visualice), en case de no haber ningun cliente no muestra nada y vuelve al menu.
 void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion){
 
     int i;
@@ -190,8 +193,8 @@ void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion)
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estructura cargada e inicializada, numero de clientes y recibir al menos de uno de estos datos: email, nombre o id
+//Postcondicion: devuelve la posicion del cliente o -1 si no existe
 int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char email, int id, int op){
 
     int i, control = 0, posicion = -1, opcion;
@@ -239,8 +242,8 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char emai
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estrucutura cargada e inicializada y recibe la posicion del cliente
+//Postcondicion: modifica los datos en estructura de datos del cliente deseado
 void ModificarCliente(Cliente *arrayClientes, int posicion){
 
     int opcion;
@@ -388,8 +391,8 @@ void ModificarCliente(Cliente *arrayClientes, int posicion){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estructura cargada e inicializada, numero de clientes, y la posicion del cliente a eliminar.
+//Postcondicion: elimina el cliente, hasta que no finalice el programa aparecera en la estructura pero sera inaccesible
 void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion){
 
     int opcion;
@@ -410,11 +413,9 @@ void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: estructura cargada e inicializada, la posicion del cliente, y recibe la operacion a relizar (op) con el dicho saldo
+//Postcondicion: modifica el parametro de saldo del cliente deseado
 void Cartera(Cliente *arrayClientes, int posicion, int operacion, int saldo){
-
-    int ;
 
     switch(operacion){
         case 0:
@@ -442,8 +443,8 @@ void Cartera(Cliente *arrayClientes, int posicion, int operacion, int saldo){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: Debe existir el fichero clientes.txt
+//Postcondicion: Carga la estructura de clientes.txt y devuelve el numero de clientes registrados
 Cliente* CargarClientes(int *n_clientes){
 
     int n_lineas = 0, i;
@@ -482,8 +483,8 @@ Cliente* CargarClientes(int *n_clientes){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: debe existir el fichero cliente.txt
+//Postcondicion: guarda la estructura de clientes en el fichero con el formato deseado
 void GuardarEstrucuturaC(Cliente *arrayClientes, int n_Clientes){
 
     int i = 0;
@@ -522,8 +523,8 @@ void GuardarEstrucuturaC(Cliente *arrayClientes, int n_Clientes){
 }
 
 //Cabecera:
-//Precondicion:
-//Postcondicion:
+//Precondicion: debe existir el nombre del fichero buscado
+//Postcondicion: cuenta las lineas del fichero
 int ContarLineas(FILE *f){
 
     int i = 1;
