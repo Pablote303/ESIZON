@@ -3,11 +3,15 @@
 #include<string.h>
 
 #include "menu.h"
-#include "clientes.h"
 #include "proveedores.h"
+#include "clientes.h"
 #include "descuentosclientes.h"
 
-crear_archivo(const char *nombre_archivo);
+void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int permisos);
+void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuentosClientes, int n_clientes, int n_proveedores, int n_descuentosclientes, int posicion, int permisos);
+void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int posicion, int permisos);
+int INI();
+void crear_archivo(const char *nombre_archivo);
 
 //Cabecera:
 //Precondicion:
@@ -53,18 +57,18 @@ void menu(){
 
         switch(opcion){
             case 1:
-                permisos = login(*arrayClientes, *arrayProveedores, *posicion, *n_clientes, *n_proveedores);
-                if(perm == -1 || perm == 3) printf("\nVolviendo al menu...\n");
+                permisos = login(arrayClientes, arrayProveedores, &posicion, &n_clientes, &n_proveedores);
+                if(permisos == -1 || permisos == 3) printf("\nVolviendo al menu...\n");
                 else{
-                    if(perm == 2) void MenuCliente(*arrayClientes, *n_clientes, permisos);
+                    if(permisos == 2) MenuCliente(arrayClientes, &n_clientes, posicion, permisos);
                     else{
-                        if(perm == 1) void MenuProveedor(*arrayClientes, *arrayProveedores, *arrayDescuentosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos);
-                        if(perm == 0) void MenuAdmin(*arrayClientes, *arrayProveedores, *arrayDescuentosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos);
+                        if(permisos == 1) MenuProveedor(arrayClientes, arrayProveedores, arrayDescuentosClientes, &n_clientes, &n_proveedores, &n_descuentosclientes, posicion, permisos);
+                        if(permisos == 0) MenuAdmin(arrayClientes, arrayProveedores, arrayDescuentosClientes, &n_clientes, &n_proveedores, &n_descuentosclientes, posicion, permisos);
                     }
                 }
                 break;
             case 2:
-                arrayClientes = CrearCliente(arrayClientes, *n_clientes);
+                arrayClientes = CrearCliente(arrayClientes, &n_clientes);
                 break;
             case 3:
                 printf("\n\nCerrando el programa, adios...\n\n");
@@ -76,9 +80,18 @@ void menu(){
 
 
     //Guardar estructuras en fichero
-    GuardarEstructuraC(arrayClientes, n_clientes);
-    GuardarEstructuraP(arrayProveedores, n_clientes);
-    GuardarEstrucuturaCD(arrayDescuentosClientes, n_descuentosclientes);
+    GuardarEstructuraC(arrayClientes, n_clientes);                          free(arrayClientes);
+    GuardarEstructuraP(arrayProveedores, n_clientes);                       free(arrayProveedores);
+    GuardarEstrucuturaCD(arrayDescuentosClientes, n_descuentosclientes);    free(arrayDescuentosClientes);
+    //Guardar Estructura Productos
+    //Guardar Estructura Categoria
+    //Guardar Estructura Descuentos
+    //Guardar Estructura Lockers
+    //Guardar Estructura Compartimientos Lockers
+    //Guardar Estructura Pedidos
+    //Guardar Estructura Productos Pedidos
+    //Guardar Estructura Transportistas
+    //Guardar Estructura Devoluciones
 
 
     return 0;
@@ -88,7 +101,7 @@ void menu(){
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-void MenuCliente(Cliente *arrayClientes, int *n_clientes, int *posicion, int permisos){
+void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int permisos){
 
     int opcion, opcion2, opcion3;
 
@@ -149,7 +162,7 @@ void MenuCliente(Cliente *arrayClientes, int *n_clientes, int *posicion, int per
 //Postcondicion:
 void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuentosClientes, int n_clientes, int n_proveedores, int n_descuentosclientes, int posicion, int permisos){
 
-    int opcion, opcion2, opcion3;
+    int opcion, opcion2;
 
     printf("Bienvenido %s\n\nMenu:\n", arrayClientes[posicion].Nomb_cliente);
 
@@ -165,16 +178,17 @@ void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, Descuent
 
                     switch(opcion2){
                         case 1:
-                            //Funcion Consultar
+                            puts("");//Funcion Consultar
                             break;
                         case 2:
-                            //Funcion Modificar
+                            puts("");//Funcion Modificar
                             break;
                         case 3:
                             printf("Volviendo...");
                             break;
                         default:
                             printf("\nError, opcion no valida, vuelva a introducir");
+                            break;
                     }
                 } while(opcion2 < 1 || opcion2 > 3);
                 break;
@@ -191,13 +205,13 @@ void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, Descuent
                 printf("Error, la opcion no es valida, vuelva a introducir.\n\n");
         }
 
-    } while(opcion != 4)
+    } while(opcion != 4);
 
 }
 
-void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, *n_clientes, *n_proveedores, *n_descuentosclientes, posicion, permisos){
+void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int posicion, int permisos){
 
-    int opcion, opcion2, opcion3;
+    int opcion, opcion2;
 
     printf("Bienvenido %s (ADMINISTRADOR)\n\nMenu:\n", arrayClientes[posicion].Nomb_cliente);
 
@@ -211,12 +225,13 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                 printf("Perfil\n\n1.- Consultar Datos\n2.- Modificar Datos\n3.- Volver al menu principal\n");
                 scanf("%i", &opcion2);
 
+                do{
                 switch(opcion2){
                     case 1:
-                        //Funcion Consultar
+                        puts("");//Funcion Consultar
                         break;
                     case 2:
-                        //Funcion Modificar
+                        puts("");//Funcion Modificar
                         break;
                     case 3:
                         printf("Volviendo...");
@@ -226,36 +241,38 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                     }
                 } while(opcion2 < 1 || opcion2 > 3);
                 break;
+
             case 2:
-                //Menu Clientes
+                puts("");//Menu Clientes
                 break;
             case 3:
-                //Menu Proveedores
+                puts("");//Menu Proveedores
                 break;
             case 4:
-                //Menu Productos
+                puts("");//Menu Productos
                 break;
             case 5:
-                //Menu Categorias
+                puts("");//Menu Categorias
                 break;
             case 6:
-                //Menu Pedidos
+                puts("");//Menu Pedidos
                 break;
             case 7:
-                //Menu Transportistas
+                puts("");//Menu Transportistas
                 break;
             case 8:
-                //Menu Descuentos
+                puts("");//Menu Descuentos
                 break;
             case 9:
-                //Menu Devoluciones
+                puts("");//Menu Devoluciones
                 break;
             case 10:
                 printf("Saliendo...\nAdios %s", arrayProveedores[posicion].Nombre);
                 break;
             default:
                 printf("Error, la opcion no es valida, vuelva a introducir.\n\n");
-
+                break;
+        }
 
     } while(opcion != 10);
 
@@ -283,13 +300,13 @@ int INI(){
 
         fputs("0000001", f);
         fputc('-', f);
-        fputs("ROOT, f);
+        fputs("ROOT", f);
         fputc('-', f);
         fputs("root@esizon.com", f);
         fputc('-', f);
-        fputs(crontrasena, f);
+        fputs(contrasena, f);
         fputc('-', f);
-        puts("administrador", f);
+        fputs("administrador", f);
 
         fclose(f);
     }

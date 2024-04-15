@@ -2,10 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 
-#include "descuentosclientes.h"
-#include "clientes.h"
-#include "menu.h"
 #include "proveedores.h"
+#include "clientes.h"
+#include "descuentosclientes.h"
 
 //Cabecera:
 //Precondicion:
@@ -15,7 +14,6 @@ DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClien
     DescuentoCliente *nuevoarray;
 
     int control = 0, opcion, elminado = 0, permiso, descuentocliente, asignacion[3], caducidad[3];
-    char , , ;
 
     *n_descuentosclientes += 1;
     descuentocliente = *n_descuentosclientes;
@@ -49,16 +47,16 @@ DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClien
         }
 
         if(control = 1){
-            nuevoarray[*n_descuentosclientes - 1].Id_Cod = arraDescuentos[pos_des]./*cod_descuento*/;
-            nuevoarray[*descuentocliente - 1].Id_cliente = arrayClientes[posicion].Id_cliente;
-            nuevoarray[*descuentocliente - 1].Estado = 0;
+            strcpy(nuevoarray[*n_descuentosclientes - 1].Id_Cod, arraDescuentos[pos_des].Id_cod);
+            nuevoarray[*n_descuentosclientes - 1].Id_cliente = arrayClientes[posicion].Id_cliente;
+            nuevoarray[*n_descuentosclientes - 1].Estado = 0;
             if(op == 1){
-                nuevoarray[*descuentocliente - 1].Fechar_asig[0] = asigVec[0]; nuevoarray[*descuentocliente - 1].Fechar_asig[1] = asigVec[1]; nuevoarray[*descuentocliente - 1].Fechar_asig[2] = asigVec[1]
-                nuevoarray[*descuentocliente - 1].Fecha_cad[0] = cadVec[0]; nuevoarray[*descuentocliente - 1].Fecha_cad[1] = cadVec[1]; nuevoarray[*descuentocliente - 1].Fecha_cad[2] = cadVec[2];
+                nuevoarray[*n_descuentosclientes - 1].Fechar_asig[0] = asigVec[0]; nuevoarray[*n_descuentosclientes - 1].Fechar_asig[1] = asigVec[1]; nuevoarray[*n_descuentosclientes - 1].Fechar_asig[2] = asigVec[1];
+                nuevoarray[*n_descuentosclientes - 1].Fecha_cad[0] = cadVec[0]; nuevoarray[*n_descuentosclientes - 1].Fecha_cad[1] = cadVec[1]; nuevoarray[*n_descuentosclientes - 1].Fecha_cad[2] = cadVec[2];
             }
             else{
-                nuevoarray[*descuentocliente - 1].Fechar_asig[0] = asignacion[0]; nuevoarray[*descuentocliente - 1].Fechar_asig[1] = asignacion[1]; nuevoarray[*descuentocliente - 1].Fechar_asig[2] = asignacion[1]
-                nuevoarray[*descuentocliente - 1].Fecha_cad[0] = caducidad[0]; nuevoarray[*descuentocliente - 1].Fecha_cad[1] = caducidad[1]; nuevoarray[*descuentocliente - 1].Fecha_cad[2] = caducidad[2];
+                nuevoarray[*n_descuentosclientes - 1].Fechar_asig[0] = asignacion[0]; nuevoarray[*n_descuentosclientes - 1].Fechar_asig[1] = asignacion[1]; nuevoarray[*n_descuentosclientes - 1].Fechar_asig[2] = asignacion[1];
+                nuevoarray[*n_descuentosclientes - 1].Fecha_cad[0] = caducidad[0]; nuevoarray[*n_descuentosclientes - 1].Fecha_cad[1] = caducidad[1]; nuevoarray[*n_descuentosclientes - 1].Fecha_cad[2] = caducidad[2];
             }
 
             nuevoarray[*n_descuentosclientes  - 1].Eliminado = 0;
@@ -89,7 +87,7 @@ int BuscarDescuentoCliente(DescuentoCliente *arrayDescuentoCliente, Cliente *arr
         }
     }
 
-    return posicion
+    return posicion;
 
 }
 
@@ -100,16 +98,16 @@ int AplicarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *
 
     int Comprobar = 0, pos_descuento;
 
-    pos_decuento = BuscarDescuentoCliente(arrayDescuentosClientes, arrayClientes, posicion, n_descuentosclientes, descuento);
+    pos_descuento = BuscarDescuentoCliente(arrayDescuentosClientes, arrayClientes, posicion, n_descuentosclientes, descuento);
 
-    if(strcmp("todos", arrayDescuento[pos_decuento]./*Aplicabilidad*/) == 1){
+    if(strcmp("todos", arrayDescuento[pos_descuento].Aplicable) == 1){
         arrayDescuentosClientes[posicion].Estado = 1;
         Comprobar = 1;
 
         printf("El descuento %s se ha aplicado\n", arrayDescuentosClientes[posicion].Id_Cod);
     }
     else{
-        if(strcmp("ESIZON", arrayDescuento[id_desc]./*Aplcabilidad*/) == 1){
+        if(strcmp("ESIZON", arrayDescuento[id_desc].Aplicable) == 1){
             if(strcmp("ESIZON", arraProveedores[pos_prov].Nombre) == 1){
                 arrayDescuentosClientes[posicion].Estado = 1;
                 Comprobar = 1;
@@ -133,7 +131,7 @@ int AplicarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *
 //Postcondicion:
 void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int n_descuentosclientes, int posicion){
 
-    int i, posicion, filas, x = 0, pag = 0;
+    int i, filas, x = 0, pag = 0, pagina;
 
     printf("Introduce el numero de descuentos a mostrar por pagina (5 a 50): ");
     scanf("%i", &pagina);
@@ -150,7 +148,7 @@ void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente 
 
             x++;
             if(x == filas-1){
-                printf("\nPagina %i de %i", x+1, n_descuestosclientes/filas);
+                printf("\nPagina %i de %i", x+1, n_descuentosclientes/filas);
                 printf("\nPulse cualquier tecla para pasar pagina...\n");
                 pag++;
                 getchar();
@@ -177,7 +175,7 @@ void ListarDescuentosTotalClientes(DescuentoCliente *arrayDescuentosClientes, Cl
     }
 
     for(i = 0; i < n_descuestosclientes; i++){
-        posicion = BuscarCliente(Cliente *arrayClientes, n_clientes, 0, 0, arrayDescuentosClientes[i].Id_cliente, 3);
+        posicion = BuscarCliente(arrayClientes, n_clientes, 0, 0, arrayDescuentosClientes[i].Id_cliente, 3);
         printf("%s - %i - Asignado: %i/%i/%i - Caduca: %i/%i/%i - Estado:", arrayClientes[posicion].email, arrayDescuentosClientes[i].Id_Cod, arrayDescuentosClientes[i].Fechar_asig[0], arrayDescuentosClientes[i].Fechar_asig[1], arrayDescuentosClientes[i].Fechar_asig[2], arrayDescuentosClientes[i].Fecha_cad[0], arrayDescuentosClientes[i].Fecha_cad[1], arrayDescuentosClientes[i].Fecha_cad[2]);
         if(arrayDescuentosClientes[i].Estado == 0) printf(" No aplicado\n");
         else printf(" Aplicado\n");

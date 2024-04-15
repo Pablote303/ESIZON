@@ -2,10 +2,8 @@
 #include<string.h>
 #include<stdlib.h>
 
-
-#include "clientes.h"
-#include "menu.h"
 #include "proveedores.h"
+#include "clientes.h"
 #include "descuentosclientes.h"
 
 #define MINIMO 5
@@ -128,9 +126,9 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
                 intento++;
             }
         }
-        if(intentos >= 3){
+        if(intento >= 3){
             perm = 3;
-            printf("\nUsuario no encontrado, intentos maximos alcanzdaos, vuelva a intentarlo mas tarde...")
+            printf("\nUsuario no encontrado, intentos maximos alcanzdaos, vuelva a intentarlo mas tarde...");
         }
     }
 
@@ -138,6 +136,7 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
         for(intento = 0; intento < 3 && control == 0; intento++){
             printf("Introduzca la contrasena: ");
             scanf("%s", contrasena_aux);
+            fflush(stdin);
             EliminarSaltoDeLinea(contrasena_aux);
 
             if(perm == 2){
@@ -187,7 +186,7 @@ void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion)
     else{
         printf("ID:%i  Nombre: %s  Direccion: %s  Localidad: %s  Provincia: %s", arrayClientes[posicion].Id_cliente, arrayClientes[posicion].Nomb_cliente, arrayClientes[posicion].Dir_cliente, arrayClientes[posicion].Localidad, arrayClientes[posicion].Provincia);
         if(op == 1) printf("\nEmail: %s  Contrasena: %s  Cartera: %s", arrayClientes[i].email, arrayClientes[i].Contrasena, arrayClientes[i].Cartera);
-        punts("");
+        puts("");
     }
 
 }
@@ -485,7 +484,7 @@ Cliente* CargarClientes(int *n_clientes){
 //Cabecera:
 //Precondicion: debe existir el fichero cliente.txt
 //Postcondicion: guarda la estructura de clientes en el fichero con el formato deseado
-void GuardarEstrucuturaC(Cliente *arrayClientes, int n_Clientes){
+void GuardarEstructuraC(Cliente *arrayClientes, int n_Clientes){
 
     int i = 0;
 

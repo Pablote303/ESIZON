@@ -3,8 +3,8 @@
 #include<string.h>
 
 #include "menu.h"
-#include "clientes.h"
 #include "proveedores.h"
+#include "clientes.h"
 #include "descuentosclientes.h"
 
 int main(){

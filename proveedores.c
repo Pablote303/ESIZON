@@ -3,8 +3,7 @@
 #include<string.h>
 
 #include "proveedores.h"
-#include "clientes.h"
-#include "menu.h"
+//#include "clientes.h"
 #include "descuentosclientes.h"
 
 //Cabecera:
@@ -174,7 +173,7 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
 //Cabecera:
 //Precondicion: estrucutura cargada e inicializada y recibe la posicion del proveedor/administrador
 //Postcondicion: modifica los datos en estructura de datos del proveedor/administrador deseado
-void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posicion, in op){
+void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posicion, int op){
 
     int opcion;
     char aux, modificacion[51], nombre[21], email[31], contrasena[16];
@@ -263,7 +262,6 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
             }while(opcion != 5 && opcion != 6);
             break;
         case 3:
-            do{
                 printf("\nPor normativa de la empresa todo administrador tendra como nombre ESIZON\ny no podra modificar su email administrativo.\n\nID: %04i\nNombre: %s\n", arrayProveedores[posicion].Id_empresa, arrayProveedores[posicion].Nombre);
                 printf("Email: %s\n", arrayProveedores[posicion].email);
                 if(contrasena != 'NULL') printf("Contrasena: %s\n", contrasena);
@@ -274,6 +272,7 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                 while(opcion < 1 || opcion > 2){
                     printf("Error, opcion no valida...\nVuelva a introducir: ");;
                     scanf("%i", &opcion);
+                }
 
                 if(opcion == 1){
                     printf("Introduzca la nueva contrasena (15 carecteres maximos): ");
@@ -287,18 +286,17 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                     }
 
                     if(opcion == 1){
-                        f(modificacion != 'NUll') strncpy(arrayProveedores[posicion].Contrasena, modificacion, sizeof(arrayProveedores[posicion].Contrasena)-1);
+                        if(modificacion != 'NUll') strncpy(arrayProveedores[posicion].Contrasena, modificacion, sizeof(arrayProveedores[posicion].Contrasena)-1);
                     }
                 }
                 else{
                     printf("Saliendo....");
-
                 }
-
-            }while(opcion != 2);
             break;
-    }
-
+        default:
+            printf("Error, en la seleccion.");
+            break;
+        }
 }
 
 //Cabecera:
