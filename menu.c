@@ -6,6 +6,7 @@
 #include "proveedores.h"
 #include "clientes.h"
 #include "descuentosclientes.h"
+#include "demo.h"
 
 void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int permisos);
 void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuentosClientes, int n_clientes, int n_proveedores, int n_descuentosclientes, int posicion, int permisos);
@@ -18,7 +19,7 @@ void crear_archivo(const char *nombre_archivo);
 //Postcondicion:
 void menu(){
 
-    int n_clientes, n_proveedores, n_descuentosclientes, opcion, posicion, permisos;
+    int n_clientes, n_proveedores, n_descuentosclientes, opcion, permisos, posicion;
 
     if(INI() == 1){
         crear_archivo("Clientes.txt");
@@ -43,7 +44,6 @@ void menu(){
 
     DescuentoCliente *arrayDescuentosClientes;
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
-printf("\n-- prueba: %s --\n", arrayProveedores[0].Contrasena);
 
     printf("Bienvenido a ESIZON\n\n");
 
@@ -53,7 +53,7 @@ printf("\n-- prueba: %s --\n", arrayProveedores[0].Contrasena);
 
         switch(opcion){
             case 1:
-                permisos = login(arrayClientes, arrayProveedores, &posicion, &n_clientes, &n_proveedores);
+                permisos = login(arrayClientes, arrayProveedores, &posicion, &n_clientes, &n_proveedores);printf("pos: %i", posicion);
                 if(permisos == -1 || permisos == 3) printf("\nVolviendo al menu...\n");
                 else{
                     if(permisos == 2) MenuCliente(arrayClientes, &n_clientes, posicion, permisos);
@@ -77,7 +77,7 @@ printf("\n-- prueba: %s --\n", arrayProveedores[0].Contrasena);
 
     //Guardar estructuras en fichero
     GuardarEstructuraC(arrayClientes, n_clientes);                          free(arrayClientes);
-    GuardarEstructuraP(arrayProveedores, n_clientes);                       free(arrayProveedores);
+    GuardarEstructuraP(arrayProveedores, n_proveedores);                       free(arrayProveedores);
     GuardarEstrucuturaCD(arrayDescuentosClientes, n_descuentosclientes);    free(arrayDescuentosClientes);
     //Guardar Estructura Productos
     //Guardar Estructura Categoria
@@ -98,7 +98,7 @@ printf("\n-- prueba: %s --\n", arrayProveedores[0].Contrasena);
 //Precondicion:
 //Postcondicion:
 void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int permisos){
-
+printf("ControlCLientes0 %i", posicion);
     int opcion, opcion2, opcion3;
 
     printf("Bienvenido %s\n\nMenu:\n", arrayClientes[posicion].Nomb_cliente);
@@ -116,13 +116,13 @@ void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int perm
 
                     switch(opcion2){
                         case 1:
-                            //Funcion Consultar
+                            ListarCliente(arrayClientes, n_clientes, posicion, 1);
                             break;
                         case 2:
-                            //Funcion Modificar
+                            ModificarCliente(arrayClientes, posicion);
                             break;
                         case 3:
-                            //Funcion añadir fondos
+                            Cartera(arrayClientes, posicion, 3, 0);
                             break;
                         case 4:
                             printf("Volviendo...");
@@ -139,8 +139,10 @@ void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int perm
                 //Funcion consultar descuentos clientes
                 break;
             case 4:
+                //Pedidos
                 break;
             case 5:
+                //Devoluciones
                 break;
             case 6:
                 printf("Saliendo...\n\nAdios %s", arrayClientes[posicion].Nomb_cliente);
@@ -160,7 +162,7 @@ void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, Descuent
 
     int opcion, opcion2;
 
-    printf("Bienvenido %s\n\nMenu:\n", arrayClientes[posicion].Nomb_cliente);
+    printf("Bienvenido %s\n\nMenu:\n", arrayProveedores[posicion].Nombre);
 
     do{
         printf("1.- Perfil\n2.- Productos\n3.- Pedidos\n4.- Salir");
@@ -174,10 +176,10 @@ void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, Descuent
 
                     switch(opcion2){
                         case 1:
-                            puts("");//Funcion Consultar
+                            ListarProveedores(arrayProveedores, n_proveedores, 0, posicion);
                             break;
                         case 2:
-                            puts("");//Funcion Modificar
+                            ModificarProveedor(arrayProveedores, n_proveedores, posicion, 1);
                             break;
                         case 3:
                             printf("Volviendo...");
@@ -209,7 +211,7 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
 
     int opcion, opcion2;
 
-    printf("Bienvenido %s (ADMINISTRADOR)\n\nMenu:\n", arrayClientes[posicion].Nomb_cliente);
+    printf("Bienvenido %s (ADMINISTRADOR)\n\nMenu:\n", arrayProveedores[posicion].Nombre);
 
     do{
 
@@ -224,10 +226,10 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                 do{
                 switch(opcion2){
                     case 1:
-                        puts("");//Funcion Consultar
+                        ListarProveedores(arrayProveedores, n_proveedores, 1, posicion);
                         break;
                     case 2:
-                        puts("");//Funcion Modificar
+                        ModificarProveedor(arrayProveedores, n_proveedores, posicion, 3);
                         break;
                     case 3:
                         printf("Volviendo...");
@@ -239,7 +241,7 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                 break;
 
             case 2:
-                puts("");//Menu Clientes
+                //Menu Clientes
                 break;
             case 3:
                 puts("");//Menu Proveedores
@@ -257,7 +259,7 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                 puts("");//Menu Transportistas
                 break;
             case 8:
-                puts("");//Menu Descuentos
+                //Menu Descuentos
                 break;
             case 9:
                 puts("");//Menu Devoluciones

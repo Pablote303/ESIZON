@@ -5,6 +5,7 @@
 #include "proveedores.h"
 #include "clientes.h"
 #include "descuentosclientes.h"
+#include "demo.h"
 
 #define MINIMO 5
 
@@ -29,7 +30,7 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
         EliminarSaltoDeLinea(email);
         fflush(stdin);
 
-        while(BuscarCliente(arrayClientes, n_clientes, 0, email, 0, 2) != -1){        //Comparar que no exista otro Cliente igual
+        while(BuscarCliente(arrayClientes, Clientes, 0, email, 0, 2) != -1){        //Comparar que no exista otro Cliente igual
             printf("\nEl Cliente introducido ya existe, vuelva a introducir otro (maximo 5 caracteres): ");
             scanf("%s", email);
             EliminarSaltoDeLinea(email);
@@ -113,12 +114,13 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
         printf("Introduzca usuario (email): ");
         scanf("%s", email_aux);
         EliminarSaltoDeLinea(email_aux);
+        fflush(stdin);
 
-        if(BuscarCliente(arrayClientes, n_clientes_aux, 0, email_aux, 0, 2) != 1){
+        if((posicion = BuscarCliente(arrayClientes, n_clientes_aux, 0, email_aux, 0, 2)) != -1){
             perm = 2;
         }
         else{
-            if(BuscarProveedor(arrayProveedores, n_proveedores_aux, 0, email_aux, 0, 2) != -1){
+            if((posicion = BuscarProveedor(arrayProveedores, n_proveedores_aux, 0, email_aux, 0, 2)) != -1){
                 perm = arrayProveedores[posicion].Perfil_usuario;
             }
             else{
@@ -141,8 +143,9 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
 
             if(perm == 2){
                 //Comparar contrasena clientes
-                if(strcmp(contrasena_aux, arrayClientes[posicion].Contrasena) == 1){
-                    control == 1;
+                if(strcmp(contrasena_aux, arrayClientes[posicion].Contrasena) == 0){
+                    control = 1;
+                    *id = posicion;
                 }
                 else{
                     printf("Contrasena incorrecta.\n");
@@ -150,9 +153,10 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
             }
             else{
                 //comparar contrasena proveedores
-                if(strcmp(contrasena_aux, arrayProveedores[posicion].Contrasena) == 1){
-                    control == 1;
-                    perm == arrayProveedores[posicion].Perfil_usuario;
+                if(strcmp(contrasena_aux, arrayProveedores[posicion].Contrasena) == 0){
+                    control = 1;
+                    perm = arrayProveedores[posicion].Perfil_usuario;
+                    *id = posicion;
                 }
                 else{
                     printf("Contrasena incorrecta.\n");
@@ -172,7 +176,7 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
 //Cabecera:
 //Precondicion: estructura cargada e inicializada, numero de clientes
 //Postcondicion: devuelve en pantalla el listado de clientes y sus datos (segun quien los visualice), en case de no haber ningun cliente no muestra nada y vuelve al menu.
-void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion){
+void ListarCliente(Cliente *arrayClientes, int n_clientes, int posicion, int op){
 
     int i;
 
@@ -194,9 +198,9 @@ void ListarCliente(Cliente *arrayClientes, int n_clientes, int op, int posicion)
 //Cabecera:
 //Precondicion: estructura cargada e inicializada, numero de clientes y recibir al menos de uno de estos datos: email, nombre o id
 //Postcondicion: devuelve la posicion del cliente o -1 si no existe
-int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char email, int id, int op){
+int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char *email, int id, int op){
 
-    int i, control = 0, posicion = -1, opcion;
+    int i, control = 0, posicion = -1, opcion; printf("\n%s\n", email);
 
     switch(op){
         case 1:
@@ -218,7 +222,7 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char emai
         case 2:
             for(i = 0; i < n_clientes && control == 0; i++){
                 if(strcmp(email, arrayClientes[i].email) == 0){
-                    posicion = i;
+                    posicion = i;printf("\nAQUI 2 . %i .\n", posicion);
                     control = 1;
                 }
             }
@@ -234,7 +238,7 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char emai
     default: printf("\nError en la seleccion de modo de busqueda.");
     }
 
-    printf("\nError, no se ha encontrado ningun cliente");
+    //printf("\nError, no se ha encontrado ningun cliente");
 
     return posicion;
 
@@ -450,7 +454,7 @@ Cliente* CargarClientes(int *n_clientes){
     Cliente *clientes;
     FILE *f;
 
-    f = fopen("clientes.txt", "r");     //Abrimos archivo de clientes.txt
+    f = fopen("Clientes.txt", "r");     //Abrimos archivo de clientes.txt
 
     if(f == NULL) printf("\nError al abrir clientes.txt");  //Comprobamos que se abre y contenga los datos bien
 
@@ -458,7 +462,7 @@ Cliente* CargarClientes(int *n_clientes){
     *n_clientes = n_lineas;
     clientes = (Cliente*)calloc(n_lineas, sizeof(Cliente));     //Memoria dinamica estrucutura
     if( clientes == NULL ) {
-        fprintf (stderr, "Error de asignaci�n de memoria") ;
+        fprintf (stderr, "Error de asignacion de memoria") ;
         exit (1);
     }
 

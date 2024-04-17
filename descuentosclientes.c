@@ -5,6 +5,7 @@
 #include "proveedores.h"
 #include "clientes.h"
 #include "descuentosclientes.h"
+#include "demo.h"
 
 //Cabecera:
 //Precondicion:
@@ -129,9 +130,9 @@ int AplicarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, int n_descuentosclientes, int posicion){
+void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arrayDescuento, int n_descuentosclientes, int n_descuentos, int posicion){
 
-    int i, filas, x = 0, pag = 0, pagina;
+    int i, filas, x = 0, pag = 0, pagina, desc;
 
     printf("Introduce el numero de descuentos a mostrar por pagina (5 a 50): ");
     scanf("%i", &pagina);
@@ -142,7 +143,7 @@ void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente 
 
     for(i = 0; i < n_descuentosclientes; i++){
         if(arrayDescuentosClientes[i].Id_cliente == arrayClientes[posicion].Id_cliente){
-            printf("%s - %i - Asignado: %i/%i/%i - Caduca: %i/%i/%i - Estado:", arrayClientes[posicion].email, arrayDescuentosClientes[i].Id_Cod, arrayDescuentosClientes[i].Fechar_asig[0], arrayDescuentosClientes[i].Fechar_asig[1], arrayDescuentosClientes[i].Fechar_asig[2], arrayDescuentosClientes[i].Fecha_cad[0], arrayDescuentosClientes[i].Fecha_cad[1], arrayDescuentosClientes[i].Fecha_cad[2]);
+            printf("%s - %i - Asignado: %i/%i/%i - Caduca: %i/%i/%i - Estado:", arrayDescuentosClientes[i].Id_Cod, arrayDescuento[desc].Importe, arrayDescuentosClientes[i].Fechar_asig[0], arrayDescuentosClientes[i].Fechar_asig[1], arrayDescuentosClientes[i].Fechar_asig[2], arrayDescuentosClientes[i].Fecha_cad[0], arrayDescuentosClientes[i].Fecha_cad[1], arrayDescuentosClientes[i].Fecha_cad[2]);
             if(arrayDescuentosClientes[i].Estado == 0) printf(" No aplicado\n");
             else printf(" Aplicado\n");
 
@@ -214,14 +215,10 @@ DescuentoCliente *CargarDescuentosClientes(int *n_descuentoscliente){
 
     for(i = 0; i < n_lineas; i++){                      //Bucle que almacena los datos de los descuentosclientes uno a uno
         fscanf(f, "%d-", &descuentosclientes[i].Id_cliente);
-        fscanf(f, "%[^-]-", descuentosclientes[i].Id_Cod);
-        fscanf(f, "%d[^-]/", descuentosclientes[i].Fechar_asig[0]);
-        fscanf(f, "%d[^/]/", descuentosclientes[i].Fechar_asig[1]);
-        fscanf(f, "%d[^/]-", descuentosclientes[i].Fechar_asig[2]);
-        fscanf(f, "%d[^-]/", descuentosclientes[i].Fecha_cad[0]);
-        fscanf(f, "%d[^/]/", descuentosclientes[i].Fecha_cad[1]);
-        fscanf(f, "%d[^/]-", &descuentosclientes[i].Fecha_cad[2]);
-        fscanf(f, "%d[^\n]\n", &descuentosclientes[i].Estado);
+        fscanf(f, "%10[^-]-", descuentosclientes[i].Id_Cod);
+        fscanf(f, "%d/%d/%d-", &descuentosclientes[i].Fechar_asig[0], &descuentosclientes[i].Fechar_asig[1], &descuentosclientes[i].Fechar_asig[2]);
+        fscanf(f, "%d/%d/%d-", &descuentosclientes[i].Fecha_cad[0], &descuentosclientes[i].Fecha_cad[1], &descuentosclientes[i].Fecha_cad[2]);
+        fscanf(f, "%d-", &descuentosclientes[i].Estado);
         descuentosclientes[i].Eliminado = 0;
     }
 

@@ -3,8 +3,9 @@
 #include<string.h>
 
 #include "proveedores.h"
-//#include "clientes.h"
+#include "clientes.h"
 #include "descuentosclientes.h"
+#include "demo.h"
 
 //Cabecera:
 //Precondicion: Cargada e inicializada la estructura de proveedores, numero de proveedores/administradores, y el tipo de registro
@@ -124,7 +125,7 @@ void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, i
 //Cabecera:
 //Precondicion: estructura cargada e inicializada, numero de proveedores/clientes y recibir al menos de uno de estos datos: email, nombre o id
 //Postcondicion: devuelve la posicion del proveedor/administrador o -1 si no existe
-int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre, char email, int id, int op){
+int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre, char *email, int id, int op){
 
     int i, control = 0, posicion = -1, opcion;
 
@@ -163,8 +164,6 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
             break;
     default: printf("\nError en la seleccion de modo de busqueda.");
     }
-
-    printf("\nError, no se ha encontrado ningun cliente");
 
     return posicion;
 
@@ -388,7 +387,7 @@ void GuardarEstructuraP(Proveedor *arrayProveedores, int n_proveedores){
             fputc('-', f);
             fputs(arrayProveedores[i].Contrasena, f);
             fputc('-', f);
-            if(arrayProveedores[i].Perfil_usuario == 0) fputs("administrador", f);
+            if(arrayProveedores[i].Perfil_usuario == 0) fputs("admin", f);
             else fputs("proveedor", f);
             //fputs(arrayProveedores[i].Perfil_usuario, f);
 
