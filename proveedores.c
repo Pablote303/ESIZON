@@ -3,9 +3,9 @@
 #include<string.h>
 
 #include "proveedores.h"
+#include "demo.h"
 #include "clientes.h"
 #include "descuentosclientes.h"
-#include "demo.h"
 
 //Cabecera:
 //Precondicion: Cargada e inicializada la estructura de proveedores, numero de proveedores/administradores, y el tipo de registro
@@ -185,11 +185,11 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
     switch(op){
         case 1 && 2:
             do{
-                if(nombre != 'NULL') printf("\nNombre: %s\n", nombre);
+                if(strlen(nombre) != 0) printf("\nNombre: %s\n", nombre);
                 else printf("\nNombre: %s\n", arrayProveedores[posicion].Nombre);
-                if(email != 'NULL') printf("Email: %s\n", email);
+                if(strlen(email) != 0) printf("Email: %s\n", email);
                 else printf("Email: %s\n", arrayProveedores[posicion].Eliminado);
-                if(contrasena != 'NULL') printf("Contrasena: %s\n", contrasena);
+                if(strlen(contrasena) != 0) printf("Contrasena: %s\n", contrasena);
                 else if(op == 2) printf("Contrasena: %s\n", arrayProveedores[posicion].Contrasena);
 
                 printf("\n�Que desea modificar?\n1.- Nombre\n2.- Email\n3.- Contrasena\n4.- Salir y Guardar\n5.- Salir sin Guardar\n");
@@ -198,55 +198,58 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                     printf("");
                     scanf("%i", &opcion);
                 }
+                fflush(stdin);
+
                 switch(opcion){
 
                 case 1:
                     printf("\nIntroduzca el nuevo nombre (maximo 20 caracteres): ");
-                    scanf("%s", modificacion);
+                    fgets(modificacion, 21, stdin);
                     EliminarSaltoDeLinea(modificacion);
-                    printf("%s\n�Es correcto? (S/N): ");
-                    scanf("%c", aux);
-                    while(aux != 'S' && aux != 'N'){
+                    fflush(stdin);
+                    printf("%s\nEs correcto? (S/N): ");
+                    scanf("%c", &aux);
+                    while((aux != 'S' && aux != 's') && (aux != 'N' && aux != 'n')){
                         printf("\nError, valor incorrecto, vuelva a introducir: ");
-                        scanf("%c", aux);
+                        scanf("%c", &aux);
                     }
-                    if(aux == 'S'){
+                    if(aux == 'S' || aux == 's'){
                         strncpy(nombre, modificacion, sizeof(nombre)-1);
                     }
                     break;
                 case 2:
                     printf("\nIntroduzca el nuevo email (maximo 30 caracteres): ");
                     scanf("%s", modificacion);
-                    EliminarSaltoDeLinea(modificacion);
-                    printf("%s\n�Es correcto? (S/N): ");
-                    scanf("%c", aux);
-                    while(aux != 'S' && aux != 'N'){
+                    fflush(stdin);
+                    printf("%s\nEs correcto? (S/N): ");
+                    scanf("%c", &aux);
+                    while((aux != 'S' && aux != 's') && (aux != 'N' && aux != 'n')){
                         printf("\nError, valor incorrecto, vuelva a introducir: ");
-                        scanf("%c", aux);
+                        scanf("%c", &aux);
                     }
-                    if(aux == 'S'){
+                    if(aux == 'S' || aux == 's'){
                         strncpy(email, modificacion, sizeof(email)-1);
                     }
                     break;
                 case 3:
                     printf("\nIntroduzca el nueva contrasena (maximo 15 caracteres): ");
                     scanf("%s", modificacion);
-                    EliminarSaltoDeLinea(modificacion);
-                    printf("%s\n�Es correcto? (S/N): ");
-                    scanf("%c", aux);
-                    while(aux != 'S' && aux != 'N'){
+                    fflush(stdin);
+                    printf("%s\nEs correcto? (S/N): ");
+                    scanf("%c", &aux);
+                    while((aux != 'S' && aux != 's') && (aux != 'N' && aux != 'n')){
                         printf("\nError, valor incorrecto, vuelva a introducir: ");
-                        scanf("%c", aux);
+                        scanf("%c", &aux);
                     }
-                    if(aux == 'S'){
+                    if(aux == 'S' || aux == 's'){
                         strncpy(contrasena, modificacion, sizeof(contrasena)-1);
                     }
                     break;
                 case 4:
                     printf("\nGURDANDO...\n");
-                    if(nombre != 'NULL') strncpy(arrayProveedores[posicion].Nombre, nombre, sizeof(arrayProveedores[posicion].Nombre)-1);
-                    if(email != 'NULL') strncpy(arrayProveedores[posicion].email, email, sizeof(arrayProveedores[posicion].email)-1);
-                    if(contrasena != 'NUll') strncpy(arrayProveedores[posicion].Contrasena, contrasena, sizeof(arrayProveedores[posicion].Contrasena)-1);
+                    if(strlen(nombre) != 0) strncpy(arrayProveedores[posicion].Nombre, nombre, sizeof(arrayProveedores[posicion].Nombre)-1);
+                    if(strlen(email) != 0) strncpy(arrayProveedores[posicion].email, email, sizeof(arrayProveedores[posicion].email)-1);
+                    if(strlen(contrasena) != 0) strncpy(arrayProveedores[posicion].Contrasena, contrasena, sizeof(arrayProveedores[posicion].Contrasena)-1);
                     printf("GUARDADO.\NSaleindo..");
                     break;
                 case 5:
@@ -263,7 +266,7 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
         case 3:
                 printf("\nPor normativa de la empresa todo administrador tendra como nombre ESIZON\ny no podra modificar su email administrativo.\n\nID: %04i\nNombre: %s\n", arrayProveedores[posicion].Id_empresa, arrayProveedores[posicion].Nombre);
                 printf("Email: %s\n", arrayProveedores[posicion].email);
-                if(contrasena != 'NULL') printf("Contrasena: %s\n", contrasena);
+                if(strlen(contrasena) != 0) printf("Contrasena: %s\n", contrasena);
                 else printf("Contrasena: %s\n", arrayProveedores[posicion].Contrasena);
 
                 printf("\n¿Desea modificar su contrasena?\n1.- Si\n2.- No");
@@ -276,16 +279,16 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                 if(opcion == 1){
                     printf("Introduzca la nueva contrasena (15 carecteres maximos): ");
                     scanf("%s", modificacion);
-                    EliminarSaltoDeLinea(modificacion);
+                    fflush(stdin);
 
-                    printf("\n¿Es correcto?  Contrasena: %s\n1.- Si\n2.- No", modificacion);
+                    printf("\nEs correcto?  Contrasena: %s\n1.- Si\n2.- No", modificacion);
                     while(opcion < 1 || opcion > 2){
                         printf("Error, opcion no valida...\nVuelva a introducir: ");;
                         scanf("%i", &opcion);
                     }
 
                     if(opcion == 1){
-                        if(modificacion != 'NUll') strncpy(arrayProveedores[posicion].Contrasena, modificacion, sizeof(arrayProveedores[posicion].Contrasena)-1);
+                        if(strlen(modificacion) != 0) strncpy(arrayProveedores[posicion].Contrasena, modificacion, sizeof(arrayProveedores[posicion].Contrasena)-1);
                     }
                 }
                 else{

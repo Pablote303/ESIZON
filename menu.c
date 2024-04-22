@@ -4,11 +4,11 @@
 
 #include "menu.h"
 #include "proveedores.h"
+#include "demo.h"
 #include "clientes.h"
 #include "descuentosclientes.h"
-#include "demo.h"
 
-void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int permisos);
+void MenuCliente(Cliente *arrayClientes, DescuentoCliente *arrayDescuentosClientes, Descuento *arraDescuento, int *n_clientes, int *n_descuentosclientes, int *n_descuentos, int posicion, int permisos);
 void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuentosClientes, int n_clientes, int n_proveedores, int n_descuentosclientes, int posicion, int permisos);
 void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int posicion, int permisos);
 int INI();
@@ -19,7 +19,7 @@ void crear_archivo(const char *nombre_archivo);
 //Postcondicion:
 void menu(){
 
-    int n_clientes, n_proveedores, n_descuentosclientes, opcion, permisos, posicion;
+    int n_clientes, n_proveedores, n_descuentosclientes, n_descuentos, opcion, permisos, posicion;
 
     if(INI() == 1){
         crear_archivo("Clientes.txt");
@@ -45,6 +45,9 @@ void menu(){
     DescuentoCliente *arrayDescuentosClientes;
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
 
+    Descuento *arrayDescuentos;
+    arrayDescuentos = CargarDescuento(&n_descuentos);
+
     printf("Bienvenido a ESIZON\n\n");
 
     do{
@@ -56,7 +59,7 @@ void menu(){
                 permisos = login(arrayClientes, arrayProveedores, &posicion, &n_clientes, &n_proveedores);printf("pos: %i", posicion);
                 if(permisos == -1 || permisos == 3) printf("\nVolviendo al menu...\n");
                 else{
-                    if(permisos == 2) MenuCliente(arrayClientes, &n_clientes, posicion, permisos);
+                    if(permisos == 2) MenuCliente(arrayClientes, arrayDescuentosClientes, arrayDescuentos, &n_clientes, &n_descuentosclientes, &n_descuentos, posicion, permisos);
                     else{
                         if(permisos == 1) MenuProveedor(arrayClientes, arrayProveedores, arrayDescuentosClientes, &n_clientes, &n_proveedores, &n_descuentosclientes, posicion, permisos);
                         if(permisos == 0) MenuAdmin(arrayClientes, arrayProveedores, arrayDescuentosClientes, &n_clientes, &n_proveedores, &n_descuentosclientes, posicion, permisos);
@@ -76,12 +79,17 @@ void menu(){
 
 
     //Guardar estructuras en fichero
-    GuardarEstructuraC(arrayClientes, n_clientes);                          free(arrayClientes);
-    GuardarEstructuraP(arrayProveedores, n_proveedores);                       free(arrayProveedores);
-    GuardarEstrucuturaCD(arrayDescuentosClientes, n_descuentosclientes);    free(arrayDescuentosClientes);
+    if(n_clientes != 0 ) GuardarEstructuraC(arrayClientes, n_clientes);
+    free(arrayClientes);
+    if(n_proveedores != 0 ) GuardarEstructuraP(arrayProveedores, n_proveedores);
+    free(arrayProveedores);
+    if(n_descuentosclientes != 0 ) GuardarEstrucuturaCD(arrayDescuentosClientes, n_descuentosclientes);
+    free(arrayDescuentosClientes);
     //Guardar Estructura Productos
     //Guardar Estructura Categoria
     //Guardar Estructura Descuentos
+    GuardarEstructuraD(arrayDescuentos, n_descuentos);
+    free(arrayDescuentos);
     //Guardar Estructura Lockers
     //Guardar Estructura Compartimientos Lockers
     //Guardar Estructura Pedidos
@@ -97,7 +105,7 @@ void menu(){
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-void MenuCliente(Cliente *arrayClientes, int *n_clientes, int posicion, int permisos){
+void MenuCliente(Cliente *arrayClientes, DescuentoCliente *arrayDescuentosClientes, Descuento *arrayDescuento, int *n_clientes, int *n_descuentosclientes, int *n_descuentos, int posicion, int permisos){
 printf("ControlCLientes0 %i", posicion);
     int opcion, opcion2, opcion3;
 
@@ -136,6 +144,8 @@ printf("ControlCLientes0 %i", posicion);
                 break;
             case 3:
                 //Menu descuentos
+                printf("Descuentos del clientes:\n");
+                ListarDescuentosCliente(arrayDescuentosClientes, arrayClientes, arrayDescuento, n_descuentosclientes, n_descuentos, posicion);
                 //Funcion consultar descuentos clientes
                 break;
             case 4:

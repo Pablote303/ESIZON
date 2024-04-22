@@ -3,14 +3,14 @@
 #include<string.h>
 
 #include "proveedores.h"
+#include "demo.h"
 #include "clientes.h"
 #include "descuentosclientes.h"
-#include "demo.h"
 
 //Cabecera:
 //Precondicion:
 //Postcondicion:
-DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arraDescuentos, int *n_descuentosclientes, int n_clientes, int pos_des, int posicion, int op, int asigVec[3], int cadVec[3]){
+DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arrayDescuentos, int *n_descuentosclientes, int n_clientes, int pos_des, int posicion, int op, int asigVec[3], int cadVec[3]){
 
     DescuentoCliente *nuevoarray;
 
@@ -48,7 +48,7 @@ DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClien
         }
 
         if(control = 1){
-            strcpy(nuevoarray[*n_descuentosclientes - 1].Id_Cod, arraDescuentos[pos_des].Id_cod);
+            strcpy(nuevoarray[*n_descuentosclientes - 1].Id_Cod, arrayDescuentos[pos_des].Id_cod);
             nuevoarray[*n_descuentosclientes - 1].Id_cliente = arrayClientes[posicion].Id_cliente;
             nuevoarray[*n_descuentosclientes - 1].Estado = 0;
             if(op == 1){

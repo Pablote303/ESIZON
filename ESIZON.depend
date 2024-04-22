@@ -1,40 +1,49 @@
 # depslib dependency file v1.0
-1712144135 source:c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.c
+1713789495 source:c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"proveedores.h"
+	"demo.h"
+	"clientes.h"
 	"descuentosclientes.h"
-	"clientes.h"
-	"menu.h"
-	"proveedores.h"
 
-1712142312 source:c:\users\pablo\documents\universidad\mp\esizon\main.c
+1713789342 source:c:\users\pablo\documents\universidad\mp\esizon\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
-	"clientes.h"
 	"proveedores.h"
+	"demo.h"
+	"clientes.h"
 	"descuentosclientes.h"
 
 1712142372 c:\users\pablo\documents\universidad\mp\esizon\menu.h
 
-1712144327 c:\users\pablo\documents\universidad\mp\esizon\clientes.h
+1713780443 c:\users\pablo\documents\universidad\mp\esizon\clientes.h
 
-1712144327 c:\users\pablo\documents\universidad\mp\esizon\proveedores.h
+1713780443 c:\users\pablo\documents\universidad\mp\esizon\proveedores.h
 
-1712144135 c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.h
+1713788738 c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.h
 
-1712143486 source:c:\users\pablo\documents\universidad\mp\esizon\proveedores.c
+1713789342 source:c:\users\pablo\documents\universidad\mp\esizon\proveedores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"proveedores.h"
+	"demo.h"
+	"clientes.h"
+	"descuentosclientes.h"
 
-1712142592 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
+1713786833 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
-	"clientes.h"
 	"proveedores.h"
+	"clientes.h"
 	"descuentosclientes.h"
+	"demo.h"
 
 1713367050 source:c:\users\pablo\desktop\universidad\mp\esizon\descuentosclientes.c
 	<stdio.h>
@@ -100,4 +109,24 @@
 	"demo.h"
 
 1713367519 c:\users\pablo\desktop\universidad\mp\esizon\demo.h
+
+1713789342 source:c:\users\pablo\documents\universidad\mp\esizon\clientes.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"proveedores.h"
+	"demo.h"
+	"clientes.h"
+	"descuentosclientes.h"
+
+1713789175 c:\users\pablo\documents\universidad\mp\esizon\demo.h
+
+1713789474 source:c:\users\pablo\documents\universidad\mp\esizon\demo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"proveedores.h"
+	"demo.h"
+	"clientes.h"
+	"descuentosclientes.h"
 

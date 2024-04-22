@@ -1,6 +1,6 @@
 #ifndef DEMO_H_INCLUDED
 #define DEMO_H_INCLUDED
-/*
+
 typedef struct{       // ESTRUCTA QUE FALTA, SOLO PARA QUE FUNCIONE EL PROGRAMA
 
     char Id_cod[11];
@@ -11,7 +11,6 @@ typedef struct{       // ESTRUCTA QUE FALTA, SOLO PARA QUE FUNCIONE EL PROGRAMA
     char Aplicable[6];
 
 } Descuento;
-*/
 /*
 typedef struct{
 
@@ -63,5 +62,8 @@ typedef struct{
 */
 
 //Funciones Publicas
+
+Descuento* CargarDescuento(int *n_descuento);
+void GuardarEstructuraD(Descuento *arrayDescuento, int n_descuento);
 
 #endif // DEMO_H_INCLUDED

@@ -12,19 +12,10 @@ typedef struct{
 
 } DescuentoCliente;
 
-typedef struct{       // ESTRUCTA QUE FALTA, SOLO PARA QUE FUNCIONE EL PROGRAMA
 
-    char Id_cod[11];
-    char Descrip[51];
-    char Tipo[8];
-    char Estado[8];
-    int Importe;
-    char Aplicable[6];
-
-} Descuento;
 
 //Funciones publicas
-DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arraDescuentos, int *n_descuentosclientes, int n_clientes, int pos_des, int posicion, int op, int asigVec[3], int cadVec[3]);
+DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arrayDescuento, int *n_descuentosclientes, int n_clientes, int pos_des, int posicion, int op, int asigVec[3], int cadVec[3]);
 int BuscarDescuentoCliente(DescuentoCliente *arrayDescuentoCliente, Cliente *arrayClientes, int pos_cliente, int n_descuentosclientes, char descuento);
 int AplicarDescuentoCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arrayDescuento, Proveedor *arraProveedores, int n_descuentosclientes, int n_clientes, char descuento, int posicion, int id_desc, int pos_prov);
 void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente *arrayClientes, Descuento *arrayDescuento, int n_descuentosclientes, int n_descuentos, int posicion);
