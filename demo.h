@@ -62,7 +62,7 @@ typedef struct{
 */
 
 //Funciones Publicas
-
+void ListarDescuentos(Descuento *arrayDescuentos, int n_descuentos);
 Descuento* CargarDescuento(int *n_descuento);
 void GuardarEstructuraD(Descuento *arrayDescuento, int n_descuento);
 

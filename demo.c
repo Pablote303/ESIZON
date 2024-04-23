@@ -7,6 +7,20 @@
 #include "clientes.h"
 #include "descuentosclientes.h"
 
+void ListarDescuentos(Descuento *arrayDescuentos, int n_descuentos){
+
+    int i;
+
+    for(i = 0; i < n_descuentos; i++){
+        printf("Id: %s\nDescripcion: %s\nTipo: %s\nAplicable: %s\nImporte: %d\nEstado: %s\n", arrayDescuentos[i].Id_cod, arrayDescuentos[i].Descrip, arrayDescuentos[i].Tipo, arrayDescuentos[i].Aplicable, arrayDescuentos[i].Importe, arrayDescuentos[i].Estado);
+
+        if(i != n_descuentos - 1) printf("\nPulse cualquier tecla para ver el siguiente descuento...");
+        else printf("\nPulse cualquier tecla para volver...");
+        gets("");
+        system("cls");
+    }
+
+}
 
 Descuento* CargarDescuento(int *n_descuento){
 

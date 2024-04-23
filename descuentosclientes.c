@@ -28,8 +28,8 @@ DescuentoCliente *AsignarDescuentoCliente(DescuentoCliente *arrayDescuentosClien
         else{               //Modo manual, se aplica descuento cliente a cliente
             printf("Introduce fecha de asignacion: ");  //Seria automatica pero no esta implementado sistema de hora y dia      /*Colocar*/fflush(stdin);
             printf("\nDia(dd): "); scanf("%i", &asignacion[0]);
-            printf("Mes (mm): "); scanf("%i", &asignacion[1]);
-            printf("Ano (aaaa): "); scanf("%i", &asignacion[2]);
+            printf("Mes(mm): "); scanf("%i", &asignacion[1]);
+            printf("Ano(aaaa): "); scanf("%i", &asignacion[2]);
 
             printf("Introduce fecha de caducidad: ");
             printf("\nDia(dd): "); scanf("%i", &caducidad[0]);

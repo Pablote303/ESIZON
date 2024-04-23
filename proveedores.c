@@ -14,7 +14,7 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
 
     Proveedor *nuevoarray;
 
-    int control = 0, opcion, elminado = 0, permiso, proveedores;
+    int control = 0, opcion, permiso, proveedores;
     char nombre[21], email[31], contrasena[16];
 
     *n_proveedores += 1;
@@ -57,12 +57,12 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
         }
 
         // Validacion datos
-        printf("\n Son correctos los datos introducidos?");
+        printf("\nSon correctos los datos introducidos?");
         if(op == 1){
             if(permiso == 1) printf("Permisos: Cliente\n");
             else printf("Permisos: administrador\n");
         }
-        printf("email: %s\ncontrasena: %s\nNombre: \n1.- Si || 2.- No || 3.- Cancelar registro\n", email, contrasena, nombre);
+        printf("email: %s\ncontrasena: %s\nNombre: %s\n1.- Si || 2.- No || 3.- Cancelar registro\n", email, contrasena, nombre);
         scanf("%i", &opcion);
         while(opcion < 1 && opcion > 3){
             printf("Error, vuelva a introducir: ");
@@ -86,7 +86,7 @@ Proveedor *CrearProveedor(Proveedor *arrayProveedores, int *n_proveedores, int o
                 strcpy(nuevoarray[*n_proveedores  - 1].Contrasena, contrasena);
                 strcpy(nuevoarray[*n_proveedores  - 1].Nombre, nombre);
 
-                nuevoarray[*n_proveedores  - 1].Perfil_usuario = permiso;  //Dinero inicial
+                nuevoarray[*n_proveedores  - 1].Perfil_usuario = permiso;
                 /*if(permiso == 1) strcpy(nuevoarray[*n_clientes - 1].Perfil_usuario, "Proveedor");
                 else strcpy(nuevoarray[*n_clientes - 1].Perfil_usuario, "administrador");*/
 
@@ -116,8 +116,9 @@ void ListarProveedores(Proveedor *arrayProveedores, int n_proveedores, int op, i
         }
     }
     else{
-        printf("Nombre: %s  Email: %s  C");
-        if(op == 1) printf("");
+        printf("Nombre: %s  Email: %s ", arrayProveedores[posicion].Nombre, arrayProveedores[posicion].email);
+        if(op == 1) printf("ID: &07i Contrasena: %s Perfil: Administrador", arrayProveedores[posicion].Id_empresa, arrayProveedores[posicion].Contrasena);
+        puts(" ");
     }
 
 }
@@ -162,7 +163,7 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
                 }
             }
             break;
-    default: printf("\nError en la seleccion de modo de busqueda.");
+    default: printf("\nError en la seleccion de modo de busqueda.\n");
     }
 
     return posicion;
@@ -192,10 +193,10 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                 if(strlen(contrasena) != 0) printf("Contrasena: %s\n", contrasena);
                 else if(op == 2) printf("Contrasena: %s\n", arrayProveedores[posicion].Contrasena);
 
-                printf("\n�Que desea modificar?\n1.- Nombre\n2.- Email\n3.- Contrasena\n4.- Salir y Guardar\n5.- Salir sin Guardar\n");
+                printf("\nQue desea modificar?\n1.- Nombre\n2.- Email\n3.- Contrasena\n4.- Salir y Guardar\n5.- Salir sin Guardar\n");
                 scanf("%i", &opcion);
                 while(opcion < 1 || opcion >5){
-                    printf("");
+                    printf("Error, opcion no valida, vuelva a introducir: ");
                     scanf("%i", &opcion);
                 }
                 fflush(stdin);
@@ -207,7 +208,7 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                     fgets(modificacion, 21, stdin);
                     EliminarSaltoDeLinea(modificacion);
                     fflush(stdin);
-                    printf("%s\nEs correcto? (S/N): ");
+                    printf("%s\nEs correcto? (S/N): ", modificacion);
                     scanf("%c", &aux);
                     while((aux != 'S' && aux != 's') && (aux != 'N' && aux != 'n')){
                         printf("\nError, valor incorrecto, vuelva a introducir: ");
@@ -221,7 +222,7 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                     printf("\nIntroduzca el nuevo email (maximo 30 caracteres): ");
                     scanf("%s", modificacion);
                     fflush(stdin);
-                    printf("%s\nEs correcto? (S/N): ");
+                    printf("%s\nEs correcto? (S/N): ", modificacion);
                     scanf("%c", &aux);
                     while((aux != 'S' && aux != 's') && (aux != 'N' && aux != 'n')){
                         printf("\nError, valor incorrecto, vuelva a introducir: ");
@@ -235,7 +236,7 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                     printf("\nIntroduzca el nueva contrasena (maximo 15 caracteres): ");
                     scanf("%s", modificacion);
                     fflush(stdin);
-                    printf("%s\nEs correcto? (S/N): ");
+                    printf("%s\nEs correcto? (S/N): ", modificacion);
                     scanf("%c", &aux);
                     while((aux != 'S' && aux != 's') && (aux != 'N' && aux != 'n')){
                         printf("\nError, valor incorrecto, vuelva a introducir: ");
@@ -250,7 +251,7 @@ void ModificarProveedor(Proveedor *arrayProveedores, int n_proveedores, int posi
                     if(strlen(nombre) != 0) strncpy(arrayProveedores[posicion].Nombre, nombre, sizeof(arrayProveedores[posicion].Nombre)-1);
                     if(strlen(email) != 0) strncpy(arrayProveedores[posicion].email, email, sizeof(arrayProveedores[posicion].email)-1);
                     if(strlen(contrasena) != 0) strncpy(arrayProveedores[posicion].Contrasena, contrasena, sizeof(arrayProveedores[posicion].Contrasena)-1);
-                    printf("GUARDADO.\NSaleindo..");
+                    printf("GUARDADO.\nSaleindo..");
                     break;
                 case 5:
                     printf("Saliendo...");
