@@ -74,7 +74,7 @@ void GuardarEstructuraD(Descuento *arrayDescuento, int n_descuento){
 
     FILE *f;
 
-    f = fopen("Descuento.txt","w");      //Abrimos el archivo el modo escritura
+    f = fopen("Descuentos.txt","w");      //Abrimos el archivo el modo escritura
     if(f == NULL) printf("\nError al abrir Descuento.txt");
 
     while(i < n_descuento){      //Guardamos la estructura Cliente a Cliente en Cliente.txt
