@@ -12,6 +12,8 @@ void ListarDescuentos(Descuento *arrayDescuentos, int n_descuentos){
     int i;
 
     for(i = 0; i < n_descuentos; i++){
+        printf("Descuento %i  ", i+1);
+
         printf("Id: %s\nDescripcion: %s\nTipo: %s\nAplicable: %s\nImporte: %d\nEstado: %s\n", arrayDescuentos[i].Id_cod, arrayDescuentos[i].Descrip, arrayDescuentos[i].Tipo, arrayDescuentos[i].Aplicable, arrayDescuentos[i].Importe, arrayDescuentos[i].Estado);
 
         if(i != n_descuentos - 1) printf("\nPulse cualquier tecla para ver el siguiente descuento...");
@@ -28,7 +30,7 @@ Descuento* CargarDescuento(int *n_descuento){
     Descuento *arrayDescuento;
     FILE *f;
 
-    f = fopen("Descuento.txt", "r");     //Abrimos archivo de arrayDescuento.txt
+    f = fopen("Descuentos.txt", "r");     //Abrimos archivo de arrayDescuento.txt
 
     if(f == NULL) printf("\nError al abrir Descuento.txt");  //Comprobamos que se abre y contenga los datos bien
 

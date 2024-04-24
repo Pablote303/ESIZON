@@ -19,7 +19,7 @@ typedef struct{
 Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes);
 int login(Cliente *, Proveedor *, int *id, int *n_clientes, int *n_proveedores);
 void ListarCliente(Cliente *arrayClientes, int n_clientes, int posicion, int op);
-int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char *email, int id, int op);
+int BuscarCliente(Cliente *arrayClientes, int n_clientes, char *nombre, char *email, int id, int op);
 void ModificarCliente(Cliente *arrayClientes, int posicion);
 void EliminarCliente(Cliente *arrayCliente, int *n_cliente, int posicion);
 void Cartera(Cliente *arrayClientes, int posicion, int operacion, int saldo);

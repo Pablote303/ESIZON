@@ -197,7 +197,7 @@ void ListarCliente(Cliente *arrayClientes, int n_clientes, int posicion, int op)
 //Cabecera:
 //Precondicion: estructura cargada e inicializada, numero de clientes y recibir al menos de uno de estos datos: email, nombre o id
 //Postcondicion: devuelve la posicion del cliente o -1 si no existe
-int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char *email, int id, int op){
+int BuscarCliente(Cliente *arrayClientes, int n_clientes, char *nombre, char *email, int id, int op){
 
     int i, control = 0, posicion = -1, opcion; printf("\n%s\n", email);
 
@@ -205,7 +205,7 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char *ema
         case 1:
             for(i = 0; i < n_clientes && control == 0; i++){
                 if(strcmp(nombre, arrayClientes[i].Nomb_cliente) == 0){
-                    printf("\nNombre: %s  Email: %s\n�Es el cliente que busca? (1.-Si / 2.-NO):  ", arrayClientes[i].Nomb_cliente, arrayClientes[i].email);
+                    printf("\nNombre: %s  Email: %s\nEs el cliente que busca? (1.-Si / 2.-NO):  ", arrayClientes[i].Nomb_cliente, arrayClientes[i].email);
                     scanf("%i", &opcion);
                     while(opcion != 1 && opcion != 2){
                         printf("\nError, valor no valido, vuelva a introducir (1.-Si / 2.-NO):  ");
@@ -221,7 +221,7 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char nombre, char *ema
         case 2:
             for(i = 0; i < n_clientes && control == 0; i++){
                 if(strcmp(email, arrayClientes[i].email) == 0){
-                    posicion = i;printf("\nAQUI 2 . %i .\n", posicion);
+                    posicion = i;
                     control = 1;
                 }
             }

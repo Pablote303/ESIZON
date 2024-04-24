@@ -10,7 +10,7 @@
 
 void MenuCliente(Cliente *arrayClientes, DescuentoCliente *arrayDescuentosClientes, Descuento *arraDescuento, int *n_clientes, int *n_descuentosclientes, int *n_descuentos, int posicion, int permisos);
 void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuentosClientes, int n_clientes, int n_proveedores, int n_descuentosclientes, int posicion, int permisos);
-void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int posicion, int permisos);
+void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, Descuento *arrayDescuentos, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int *n_descuentos, int posicion, int permisos);
 int INI();
 void crear_archivo(const char *nombre_archivo);
 
@@ -37,10 +37,10 @@ void menu(){
 
     //Carga de estructuras
     Cliente *arrayClientes;
-    arrayClientes = CargarClientes(&n_clientes); printf("\n *-*- clientes: %i -*-* \n", n_clientes);
+    arrayClientes = CargarClientes(&n_clientes);
 
     Proveedor *arrayProveedores;
-    arrayProveedores = CargarProveedores(&n_proveedores); printf("\n *-*- proveedores: %i -*-* \n", n_proveedores);
+    arrayProveedores = CargarProveedores(&n_proveedores);
 
     DescuentoCliente *arrayDescuentosClientes;
     arrayDescuentosClientes = CargarDescuentosClientes(&n_descuentosclientes);
@@ -62,12 +62,13 @@ void menu(){
                     if(permisos == 2) MenuCliente(arrayClientes, arrayDescuentosClientes, arrayDescuentos, &n_clientes, &n_descuentosclientes, &n_descuentos, posicion, permisos);
                     else{
                         if(permisos == 1) MenuProveedor(arrayClientes, arrayProveedores, arrayDescuentosClientes, &n_clientes, &n_proveedores, &n_descuentosclientes, posicion, permisos);
-                        if(permisos == 0) MenuAdmin(arrayClientes, arrayProveedores, arrayDescuentosClientes, &n_clientes, &n_proveedores, &n_descuentosclientes, posicion, permisos);
+                        if(permisos == 0) MenuAdmin(arrayClientes, arrayProveedores, arrayDescuentosClientes, arrayDescuentos, &n_clientes, &n_proveedores, &n_descuentosclientes, &n_descuentos, posicion, permisos);
                     }
                 }
                 break;
             case 2:
                 arrayClientes = CrearCliente(arrayClientes, &n_clientes);
+                system("cls");
                 break;
             case 3:
                 printf("\n\nCerrando el programa, adios...\n\n");
@@ -217,9 +218,10 @@ void MenuProveedor(Cliente *arrayClientes, Proveedor *arrayProveedores, Descuent
 
 }
 
-void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int posicion, int permisos){
+void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCliente *arrayDescuesntosClientes, Descuento *arrayDescuentos, int *n_clientes, int *n_proveedores, int *n_descuentosclientes, int *n_descuentos, int posicion, int permisos){
 
-    int opcion, opcion2;
+    int opcion, opcion2, posicion_descuento, id, opcion3;
+    char email[21];
 
     printf("Bienvenido %s (ADMINISTRADOR)\n\nMenu:\n", arrayProveedores[posicion].Nombre);
 
@@ -252,9 +254,217 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
 
             case 2:
                 //Menu Clientes
+                printf("Perfil\n\n1.- Listar CLientes\n2.- Modificar Datos de un cliente\n3.- Eliminar a un cliente\n4. Dar de alta un cliente\n5. Volver al menu principal\n");
+                scanf("%i", &opcion2);
+
+                do{
+                switch(opcion2){
+                    case 1:
+                        ListarCliente(arrayClientes, n_clientes, -1, 0);
+                        break;
+                    case 2:
+                        printf("Desea buscar al cliente por: \n1.- ID 2.- Email\n");
+                        scanf("%i", &opcion3);
+                        while(opcion3 < 1 || opcion3 > 2){
+                            printf("\nError al elegir la opcion, vuelva a introducirla: ");
+                            scanf("%i", &opcion3);
+                        }
+                        system("cls");
+                        ListarCliente(arrayClientes, n_clientes, -1, 0);
+                        if(opcion3 == 1){
+                            printf("\nIntroduzca la id: ");
+                            scanf("%i", &id);
+                            while(id < 1 || id > n_clientes){
+                                printf("\nID no valida, vuelva a introducir: ");
+                                scanf("%i", &id);
+                            }
+                            id--;
+
+                            posicion = BuscarCliente(arrayClientes, n_clientes, 0, 0, id, 3);
+
+                            if(posicion == -1){
+                                printf("\nError, clienter no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        else{
+                            printf("Introduzca el email: ");
+                            scanf("%s", email);
+                            fflush(stdin);
+
+                            posicion = BuscarCliente(arrayClientes, n_clientes, 0, email, 0, 2);
+
+                            if(posicion == -1){
+                                printf("\nError, clienter no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        ModificarCliente(arrayClientes, posicion);
+                        break;
+                    case 3:
+                        printf("Desea buscar al cliente por: \n1.- ID 2.- Email\n");
+                        scanf("%i", &opcion3);
+                        while(opcion3 < 1 || opcion3 > 2){
+                            printf("\nError al elegir la opcion, vuelva a introducirla: ");
+                            scanf("%i", &opcion3);
+                        }
+                        system("cls");
+                        ListarCliente(arrayClientes, n_clientes, -1, 0);
+                        if(opcion3 == 1){
+                            printf("\nIntroduzca la id: ");
+                            scanf("%i", &id);
+                            while(id < 1 || id > n_clientes){
+                                printf("\nID no valida, vuelva a introducir: ");
+                                scanf("%i", &id);
+                            }
+                            id--;
+
+                            posicion = BuscarCliente(arrayClientes, n_clientes, 0, 0, id, 3);
+
+                            if(posicion == -1){
+                                printf("\nError, clienter no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        else{
+                            printf("Introduzca el email: ");
+                            scanf("%s", email);
+                            fflush(stdin);
+
+                            posicion = BuscarCliente(arrayClientes, n_clientes, 0, email, 0, 2);
+
+                            if(posicion == -1){
+                                printf("\nError, cliente no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        EliminarCliente(arrayClientes, *n_clientes, posicion);
+                        printf("\nPulse cualquier tecla para continuar...");
+                        fgetc(""); system("cls");
+                        printf("\nVolviendo al menu principal\n");
+                        break;
+                    case 4:
+                        system("cls");
+                        printf("Introduzca los datos del nuevo cliente:\n");
+                        CrearCliente(arrayClientes, &n_clientes);
+                        printf("\nPulse cualquier tecla para continuar...");
+                        fgetc(""); system("cls");
+                        printf("\nVolviendo al menu principal\n");
+                        break;
+                    case 5:
+                        printf("Volviendo...");
+                        break;
+                    default:
+                        printf("\nError, opcion no valida, vuelva a introducir");
+                    }
+                } while(opcion2 < 1 || opcion2 > 5);
                 break;
             case 3:
-                puts("");//Menu Proveedores
+                //Menu Proveedores
+                printf("Perfil\n\n1.- Listar Proveedores\n2.- Modificar Datos de un proveedor\n3.- Eliminar a un proveedor\n4. Dar de alta un proveedor\n5. Volver al menu principal\n");
+                scanf("%i", &opcion2);
+
+                do{
+                switch(opcion2){
+                    case 1:
+                        ListarProveedores(arrayProveedores, n_proveedores, 1, -1);
+                        break;
+                    case 2:
+                        printf("Desea buscar al proveedor por: \n1.- ID 2.- Email\n");
+                        scanf("%i", &opcion3);
+                        while(opcion3 < 1 || opcion3 > 2){
+                            printf("\nError al elegir la opcion, vuelva a introducirla: ");
+                            scanf("%i", &opcion3);
+                        }
+                        system("cls");
+                        ListarProveedores(arrayProveedores, n_proveedores, 1, -1);
+                        if(opcion3 == 1){
+                            printf("\nIntroduzca la id: ");
+                            scanf("%i", &id);
+                            while(id < 1 || id > n_clientes){
+                                printf("\nID no valida, vuelva a introducir: ");
+                                scanf("%i", &id);
+                            }
+                            id--;
+
+                            posicion = BuscarProveedor(arrayProveedores, n_proveedores, 0, 0, id, 3);
+
+                            if(posicion == -1){
+                                printf("\nError, proveedor no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        else{
+                            printf("Introduzca el email: ");
+                            scanf("%s", email);
+                            fflush(stdin);
+
+                            posicion = BuscarProveedor(arrayProveedores, n_proveedores, 0, 0, id, 2);
+
+                            if(posicion == -1){
+                                printf("\nError, proveedor no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        ModificarProveedor(arrayProveedores, n_proveedores, posicion, 1);
+                        break;
+                    case 3:
+                        printf("Desea buscar al proveedor por: \n1.- ID 2.- Email\n");
+                        scanf("%i", &opcion3);
+                        while(opcion3 < 1 || opcion3 > 2){
+                            printf("\nError al elegir la opcion, vuelva a introducirla: ");
+                            scanf("%i", &opcion3);
+                        }
+                        system("cls");
+                        ListarProveedores(arrayProveedores, n_proveedores, 1, -1);
+                        if(opcion3 == 1){
+                            printf("\nIntroduzca la id: ");
+                            scanf("%i", &id);
+                            while(id < 1 || id > n_clientes){
+                                printf("\nID no valida, vuelva a introducir: ");
+                                scanf("%i", &id);
+                            }
+                            id--;
+
+                            posicion = BuscarProveedor(arrayProveedores, n_proveedores, 0, 0, id, 3);
+
+                            if(posicion == -1){
+                                printf("\nError, proveedor no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        else{
+                            printf("Introduzca el email: ");
+                            scanf("%s", email);
+                            fflush(stdin);
+
+                            posicion = BuscarProveedor(arrayProveedores, n_proveedores, 0, 0, id, 2);
+
+                            if(posicion == -1){
+                                printf("\nError, proveedor no encontrado, volviendo...");
+                                break;
+                            }
+                        }
+                        EliminarProv(arrayProveedores, &n_proveedores, posicion);
+                        printf("\nPulse cualquier tecla para continuar...");
+                        fgetc(""); system("cls");
+                        printf("\nVolviendo al menu principal\n");
+                        break;
+                    case 4:
+                        system("cls");
+                        printf("Introduzca los datos del nuevo cliente:\n");
+                        CrearCliente(arrayClientes, &n_clientes);
+                        printf("\nPulse cualquier tecla para continuar...");
+                        fgetc(""); system("cls");
+                        printf("\nVolviendo al menu principal\n");
+                        break;
+                    case 5:
+                        printf("Volviendo...");
+                        break;
+                    default:
+                        printf("\nError, opcion no valida, vuelva a introducir");
+                    }
+                } while(opcion2 < 1 || opcion2 > 5);
                 break;
             case 4:
                 puts("");//Menu Productos
@@ -270,6 +480,29 @@ void MenuAdmin(Cliente *arrayClientes, Proveedor *arrayProveedores, DescuentoCli
                 break;
             case 8:
                 //Menu Descuentos
+                printf("\nDemo prueba:\nElige uno de los dos descuentos para aplicarle al cliente que elijas: \n");
+                ListarDescuentos(arrayDescuentos, n_descuentos);
+
+                printf("\nDescuento: ");
+                scanf("%i", &posicion_descuento);
+                while(posicion_descuento < 1 || posicion_descuento > 2){
+                    printf("\nError, opcion no valida, vuelva a introducir: ");
+                    scanf("%i", &posicion_descuento);
+                }
+
+                ListarCliente(arrayClientes, n_clientes, -1, 0);
+                printf("\nIntroduzca la id: ");
+                scanf("%i", &id);
+                while(id < 1 || id > n_clientes){
+                    printf("\nID no valida, vuelva a introducir: ");
+                    scanf("%i", &id);
+                }
+                id--;
+
+                posicion = BuscarCliente(arrayClientes, n_clientes, 0, 0, id, 3);
+
+                AsignarDescuentoCliente(arrayDescuesntosClientes, arrayClientes, arrayDescuentos, n_descuentosclientes, n_clientes, posicion_descuento, posicion, 0, 0, 0);
+
                 break;
             case 9:
                 puts("");//Menu Devoluciones
@@ -319,35 +552,9 @@ int INI(){
         fclose(f);
     }
     else fclose(f);
-/*
-    f = fopen("AdminProv.txt","r");
-    if(f == NULL){
-        control = 1;
 
-        f = fopen("AdminProv.txt", "w");
+    printf("\nSe ha generado el perfiles:\nAdmin: root@esizon.com.\n");
 
-        fputs("0000001", f);
-        fputc('-', f);
-        fputs("ROOT", f);
-        fputc('-', f);
-        fputs("ESIZON", f);
-        fputc('-', f);
-        fputs("ESIZON", f);
-        fputc('-', f);
-        fputs("ESIZON", f);
-        fputc('-', f);
-        fputs("root@cliente.com", f);
-        fputc('-', f);
-        fputs(contrasena, f);
-        fputc('-', f);
-        fputs("administrador", f);
-
-        fclose(f);
-    }
-    else fclose(f);
-
-    printf("\nSe ha generado los perfiles:\nAdmin: root@esizon.com\nCliente: root@cliente.com\nAmbas con misma contrasena.\n");
-*/
     return control;
 
 }
