@@ -132,7 +132,7 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
 
     switch(op){
         case 1:
-            for(i = 0; i < n_proveedores && control == 0; i++){
+            for(i = 0; i <= n_proveedores && control == 0; i++){
                 if(strcmp(nombre, arrayProveedores[i].Nombre) == 0){
                     printf("\nNombre: %s  Email: %s\n Es el proveedor que busca? (1.-Si / 2.-NO):  ", arrayProveedores[i].Nombre, arrayProveedores[i].email);
                     scanf("%i", &opcion);
@@ -148,7 +148,7 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
             }
             break;
         case 2:
-            for(i = 0; i < n_proveedores && control == 0; i++){
+            for(i = 0; i <= n_proveedores && control == 0; i++){
                 if(strcmp(email, arrayProveedores[i].email) == 0){
                     posicion = i;
                     control = 1;
@@ -156,7 +156,7 @@ int BuscarProveedor(Proveedor *arrayProveedores, int n_proveedores, char nombre,
             }
             break;
         case 3:
-            for(i = 0; i < n_proveedores && control == 0; i++){
+            for(i = 0; i <= n_proveedores && control == 0; i++){
                 if(id == arrayProveedores[i].Id_empresa){
                     posicion = i;
                     control = 1;
@@ -340,17 +340,16 @@ Proveedor *CargarProveedores(int *n_proveedores){
 
     n_lineas = ContarLineas(f);     //numeros de lineas igual al nuemro de proveedores
     *n_proveedores = n_lineas;
-    proveedores = (Proveedor*)calloc(n_lineas, sizeof(Proveedor));     //Memoria dinamica estrucutura
+    proveedores = (Proveedor*)calloc(n_lineas+1, sizeof(Proveedor));     //Memoria dinamica estrucutura
 
     rewind(f);
 
-    for(i = 0; i < n_lineas; i++){                      //Bucle que almacena los datos de los proveedores uno a uno
+    for(i = 0; i <= n_lineas; i++){                      //Bucle que almacena los datos de los proveedores uno a uno
         fscanf(f, "%d-", &proveedores[i].Id_empresa);
         fscanf(f, "%[^-]-", proveedores[i].Nombre);
         fscanf(f, "%[^-]-", proveedores[i].email);
         fscanf(f, "%[^-]-", proveedores[i].Contrasena);
         fscanf(f, "%[^\n]\n", perfil); printf("/*/*/ %s /*/*/*", perfil);
-        //EliminarSaltoDeLinea(perfil);
         fflush(stdin);
         if(strcmp(perfil, ad) == 0){
             proveedores[i].Perfil_usuario = 0;

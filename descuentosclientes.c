@@ -135,7 +135,7 @@ void ListarDescuentosCliente(DescuentoCliente *arrayDescuentosClientes, Cliente 
     int i, filas, x = 0, pag = 0, pagina, desc;
 
     printf("Introduce el numero de descuentos a mostrar por pagina (5 a 50): ");
-    scanf("%i", &pagina);
+    scanf("%i", &filas);
     while(filas < 5 || filas > 50){
         printf("Valor introducido no valido, vuelva a introducir la cantidad: ");
         scanf("%i", &filas);

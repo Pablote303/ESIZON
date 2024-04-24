@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1713913446 source:c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.c
+1713946282 source:c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -26,7 +26,7 @@
 
 1713788738 c:\users\pablo\documents\universidad\mp\esizon\descuentosclientes.h
 
-1713913446 source:c:\users\pablo\documents\universidad\mp\esizon\proveedores.c
+1713947829 source:c:\users\pablo\documents\universidad\mp\esizon\proveedores.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -35,15 +35,15 @@
 	"clientes.h"
 	"descuentosclientes.h"
 
-1713786833 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
+1713946775 source:c:\users\pablo\documents\universidad\mp\esizon\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
 	"proveedores.h"
+	"demo.h"
 	"clientes.h"
 	"descuentosclientes.h"
-	"demo.h"
 
 1713863374 source:c:\users\pablo\desktop\universidad\mp\esizon\descuentosclientes.c
 	<stdio.h>
@@ -111,7 +111,7 @@
 
 1713863374 c:\users\pablo\desktop\universidad\mp\esizon\demo.h
 
-1713923740 source:c:\users\pablo\documents\universidad\mp\esizon\clientes.c
+1713947880 source:c:\users\pablo\documents\universidad\mp\esizon\clientes.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>

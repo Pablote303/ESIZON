@@ -37,7 +37,7 @@ void menu(){
 
     //Carga de estructuras
     Cliente *arrayClientes;
-    arrayClientes = CargarClientes(&n_clientes);
+    arrayClientes = CargarClientes(&n_clientes); printf("\n . %s . \n", arrayClientes[0].email);
 
     Proveedor *arrayProveedores;
     arrayProveedores = CargarProveedores(&n_proveedores);
@@ -550,10 +550,9 @@ int INI(){
         fputs("admin", f);
 
         fclose(f);
+        printf("\nSe ha generado el perfiles:\nAdmin: root@esizon.com.\n");
     }
     else fclose(f);
-
-    printf("\nSe ha generado el perfiles:\nAdmin: root@esizon.com.\n");
 
     return control;
 

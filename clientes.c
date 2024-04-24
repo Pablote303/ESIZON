@@ -25,7 +25,8 @@ Cliente *CrearCliente(Cliente *arrayClientes, int *n_clientes){
 
     // Formulario registro
     while(control == 0){
-        printf("Introduce email (maximo 30 caracteres): "); /*Colocar*/fflush(stdin);
+        fflush(stdin);
+        printf("Introduce email (maximo 30 caracteres): ");
         fgets(email, 31, stdin);
         EliminarSaltoDeLinea(email);
         fflush(stdin);
@@ -120,7 +121,7 @@ int login(Cliente *arrayClientes, Proveedor *arrayProveedores, int *id, int *n_c
         }
         else{
             if((posicion = BuscarProveedor(arrayProveedores, n_proveedores_aux, 0, email_aux, 0, 2)) != -1){
-                perm = arrayProveedores[posicion].Perfil_usuario;
+                perm = arrayProveedores[posicion].Perfil_usuario; printf("%s ", email_aux);
             }
             else{
                 printf("\nError, usuario no encontrado, vuelva a intentarlo... (Intentos: %i)", 3 - intento);
@@ -180,7 +181,7 @@ void ListarCliente(Cliente *arrayClientes, int n_clientes, int posicion, int op)
     int i;
 
     if(posicion == -1){
-        for(i = 0; i < n_clientes; i++){
+        for(i = 0; i <= n_clientes; i++){
             printf("ID:%i  Nombre: %s  Direccion: %s  Localidad: %s  Provincia: %s", arrayClientes[i].Id_cliente, arrayClientes[i].Nomb_cliente, arrayClientes[i].Dir_cliente, arrayClientes[i].Localidad, arrayClientes[i].Provincia);
             if(op == 1) printf("\nEmail: %s  Contrasena: %s  Cartera: %d", arrayClientes[i].email, arrayClientes[i].Contrasena, arrayClientes[i].Cartera);
             puts("");
@@ -203,7 +204,7 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char *nombre, char *em
 
     switch(op){
         case 1:
-            for(i = 0; i < n_clientes && control == 0; i++){
+            for(i = 0; i <= n_clientes && control == 0; i++){
                 if(strcmp(nombre, arrayClientes[i].Nomb_cliente) == 0){
                     printf("\nNombre: %s  Email: %s\nEs el cliente que busca? (1.-Si / 2.-NO):  ", arrayClientes[i].Nomb_cliente, arrayClientes[i].email);
                     scanf("%i", &opcion);
@@ -218,8 +219,8 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char *nombre, char *em
                 }
             }
             break;
-        case 2:
-            for(i = 0; i < n_clientes && control == 0; i++){
+        case 2:printf("\n . %i . \n", n_clientes);
+            for(i = 0; i <= n_clientes && control == 0; i++){printf("\n . %s . \n", arrayClientes[0].email);
                 if(strcmp(email, arrayClientes[i].email) == 0){
                     posicion = i;
                     control = 1;
@@ -227,7 +228,7 @@ int BuscarCliente(Cliente *arrayClientes, int n_clientes, char *nombre, char *em
             }
             break;
         case 3:
-            for(i = 0; i < n_clientes && control == 0; i++){
+            for(i = 0; i <= n_clientes && control == 0; i++){
                 if(id == arrayClientes[i].Id_cliente){
                     posicion = i;
                     control = 1;
@@ -475,7 +476,7 @@ Cliente* CargarClientes(int *n_clientes){
     n_lineas = ContarLineas(f);     //numeros de lineas igual al nuemro de clientes
     *n_clientes = n_lineas;
 
-    clientes = (Cliente*)calloc(n_lineas, sizeof(Cliente));     //Memoria dinamica estrucutura
+    clientes = (Cliente*)calloc(n_lineas+1, sizeof(Cliente));     //Memoria dinamica estrucutura
 
     if( clientes == NULL ) {
         fprintf (stderr, "Error de asignacion de memoria") ;
@@ -484,7 +485,7 @@ Cliente* CargarClientes(int *n_clientes){
 
     rewind(f);
 
-    for(i = 0; i < n_lineas; i++){                      //Bucle que almacena los datos de los clientes uno a uno
+    for(i = 0; i <= n_lineas; i++){                      //Bucle que almacena los datos de los clientes uno a uno
         fscanf(f, "%d-", &clientes[i].Id_cliente);
         fscanf(f, "%[^-]-", clientes[i].Nomb_cliente);
         fscanf(f, "%[^-]-", clientes[i].Dir_cliente);
@@ -513,7 +514,7 @@ void GuardarEstructuraC(Cliente *arrayClientes, int n_Clientes){
     f = fopen("Clientes.txt","w");      //Abrimos el archivo el modo escritura
     if(f == NULL) printf("\nError al abrir Clientes.txt");
 
-    while(i < n_Clientes){      //Guardamos la estructura Cliente a Cliente en Cliente.txt
+    while(i < n_Clientes+1){      //Guardamos la estructura Cliente a Cliente en Cliente.txt
         if(arrayClientes[i].Eliminado != 1){        //Solo si no esta borrado
 
             fprintf(f, "%07i", arrayClientes[i].Id_cliente);
